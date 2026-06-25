@@ -1,0 +1,1355 @@
+{
+  "model_metadata": {
+    "model_name": "Pythia 70M",
+    "model_key": "pythia-70m",
+    "prompt": "tell me the capital city of Japan!",
+    "tokens": [
+      "tell",
+      "me",
+      "the",
+      "capital",
+      "city",
+      "of",
+      "Japan",
+      "!"
+    ],
+    "hook_point": "blocks.4.hook_resid_post",
+    "layer": 4,
+    "d_model": 512,
+    "sae_release": "pythia-70m-deduped",
+    "sae_id": "res-jb",
+    "pipeline_mode": "mock"
+  },
+  "fired_features_summary": [
+    {
+      "feature_id": 1825,
+      "max_activation": 6.4814,
+      "avg_activation": 6.4814,
+      "fired_token_count": 1,
+      "concept_label": "Environmental Topics"
+    },
+    {
+      "feature_id": 3106,
+      "max_activation": 6.478,
+      "avg_activation": 6.478,
+      "fired_token_count": 1,
+      "concept_label": "Legal & Regulatory"
+    },
+    {
+      "feature_id": 2700,
+      "max_activation": 6.4534,
+      "avg_activation": 6.4534,
+      "fired_token_count": 1,
+      "concept_label": "Corporate Entities"
+    },
+    {
+      "feature_id": 1970,
+      "max_activation": 6.4231,
+      "avg_activation": 6.4231,
+      "fired_token_count": 1,
+      "concept_label": "Scientific Concepts"
+    },
+    {
+      "feature_id": 3076,
+      "max_activation": 6.3992,
+      "avg_activation": 6.3992,
+      "fired_token_count": 1,
+      "concept_label": "Legal & Regulatory"
+    },
+    {
+      "feature_id": 1510,
+      "max_activation": 6.3884,
+      "avg_activation": 6.3884,
+      "fired_token_count": 1,
+      "concept_label": "Consumer Electronics"
+    },
+    {
+      "feature_id": 1633,
+      "max_activation": 6.3209,
+      "avg_activation": 6.3209,
+      "fired_token_count": 1,
+      "concept_label": "Market Dynamics"
+    },
+    {
+      "feature_id": 3511,
+      "max_activation": 6.2789,
+      "avg_activation": 6.2789,
+      "fired_token_count": 1,
+      "concept_label": "Tech Release"
+    },
+    {
+      "feature_id": 1199,
+      "max_activation": 6.2497,
+      "avg_activation": 6.2497,
+      "fired_token_count": 1,
+      "concept_label": "Logical Connectives"
+    },
+    {
+      "feature_id": 184,
+      "max_activation": 6.2149,
+      "avg_activation": 6.2149,
+      "fired_token_count": 1,
+      "concept_label": "Named Persons"
+    },
+    {
+      "feature_id": 276,
+      "max_activation": 6.1399,
+      "avg_activation": 6.1399,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 314,
+      "max_activation": 6.1096,
+      "avg_activation": 6.1096,
+      "fired_token_count": 1,
+      "concept_label": "Innovation & R&D"
+    },
+    {
+      "feature_id": 1387,
+      "max_activation": 6.0777,
+      "avg_activation": 6.0777,
+      "fired_token_count": 1,
+      "concept_label": "Numeric Values"
+    },
+    {
+      "feature_id": 2003,
+      "max_activation": 6.0754,
+      "avg_activation": 6.0522,
+      "fired_token_count": 2,
+      "concept_label": "Cultural References"
+    },
+    {
+      "feature_id": 290,
+      "max_activation": 5.9567,
+      "avg_activation": 5.9567,
+      "fired_token_count": 1,
+      "concept_label": "Scientific Concepts"
+    },
+    {
+      "feature_id": 1111,
+      "max_activation": 5.8798,
+      "avg_activation": 5.8798,
+      "fired_token_count": 1,
+      "concept_label": "Tech Release"
+    },
+    {
+      "feature_id": 529,
+      "max_activation": 5.8149,
+      "avg_activation": 5.8149,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Negative"
+    },
+    {
+      "feature_id": 3982,
+      "max_activation": 5.7949,
+      "avg_activation": 5.7949,
+      "fired_token_count": 1,
+      "concept_label": "Sports & Recreation"
+    },
+    {
+      "feature_id": 1708,
+      "max_activation": 5.7817,
+      "avg_activation": 5.3972,
+      "fired_token_count": 2,
+      "concept_label": "Abstract Reasoning"
+    },
+    {
+      "feature_id": 700,
+      "max_activation": 5.7677,
+      "avg_activation": 5.7677,
+      "fired_token_count": 1,
+      "concept_label": "Consumer Electronics"
+    },
+    {
+      "feature_id": 3406,
+      "max_activation": 5.7343,
+      "avg_activation": 5.7343,
+      "fired_token_count": 1,
+      "concept_label": "Legal & Regulatory"
+    },
+    {
+      "feature_id": 838,
+      "max_activation": 5.7231,
+      "avg_activation": 5.7231,
+      "fired_token_count": 1,
+      "concept_label": "Abstract Reasoning"
+    },
+    {
+      "feature_id": 163,
+      "max_activation": 5.6655,
+      "avg_activation": 5.6655,
+      "fired_token_count": 1,
+      "concept_label": "Market Dynamics"
+    },
+    {
+      "feature_id": 1295,
+      "max_activation": 5.6103,
+      "avg_activation": 5.6103,
+      "fired_token_count": 1,
+      "concept_label": "Geopolitical"
+    },
+    {
+      "feature_id": 1476,
+      "max_activation": 5.5978,
+      "avg_activation": 5.5978,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 3642,
+      "max_activation": 5.5746,
+      "avg_activation": 5.5746,
+      "fired_token_count": 1,
+      "concept_label": "Software Ecosystem"
+    },
+    {
+      "feature_id": 1903,
+      "max_activation": 5.5492,
+      "avg_activation": 5.5492,
+      "fired_token_count": 1,
+      "concept_label": "Market Dynamics"
+    },
+    {
+      "feature_id": 1267,
+      "max_activation": 5.5282,
+      "avg_activation": 5.5282,
+      "fired_token_count": 1,
+      "concept_label": "Numeric Values"
+    },
+    {
+      "feature_id": 2421,
+      "max_activation": 5.5045,
+      "avg_activation": 5.5045,
+      "fired_token_count": 1,
+      "concept_label": "Historical References"
+    },
+    {
+      "feature_id": 1263,
+      "max_activation": 5.4638,
+      "avg_activation": 5.4638,
+      "fired_token_count": 1,
+      "concept_label": "Financial News"
+    },
+    {
+      "feature_id": 3491,
+      "max_activation": 5.3806,
+      "avg_activation": 5.3806,
+      "fired_token_count": 1,
+      "concept_label": "Brand Names"
+    },
+    {
+      "feature_id": 1862,
+      "max_activation": 5.3431,
+      "avg_activation": 5.3431,
+      "fired_token_count": 1,
+      "concept_label": "Product Announcement"
+    },
+    {
+      "feature_id": 1601,
+      "max_activation": 5.2151,
+      "avg_activation": 5.2151,
+      "fired_token_count": 1,
+      "concept_label": "Brand Names"
+    },
+    {
+      "feature_id": 566,
+      "max_activation": 5.2033,
+      "avg_activation": 4.9394,
+      "fired_token_count": 2,
+      "concept_label": "Political Discourse"
+    },
+    {
+      "feature_id": 1895,
+      "max_activation": 5.2015,
+      "avg_activation": 5.2015,
+      "fired_token_count": 1,
+      "concept_label": "Geopolitical"
+    },
+    {
+      "feature_id": 489,
+      "max_activation": 5.1968,
+      "avg_activation": 5.1968,
+      "fired_token_count": 1,
+      "concept_label": "Attributive Adjectives"
+    },
+    {
+      "feature_id": 1315,
+      "max_activation": 5.0676,
+      "avg_activation": 5.0676,
+      "fired_token_count": 1,
+      "concept_label": "Environmental Topics"
+    },
+    {
+      "feature_id": 264,
+      "max_activation": 5.0124,
+      "avg_activation": 5.0124,
+      "fired_token_count": 1,
+      "concept_label": "Medical & Health"
+    },
+    {
+      "feature_id": 269,
+      "max_activation": 5.0108,
+      "avg_activation": 5.0108,
+      "fired_token_count": 1,
+      "concept_label": "Logical Connectives"
+    },
+    {
+      "feature_id": 3995,
+      "max_activation": 5.0028,
+      "avg_activation": 5.0028,
+      "fired_token_count": 1,
+      "concept_label": "Geopolitical"
+    },
+    {
+      "feature_id": 3110,
+      "max_activation": 4.9969,
+      "avg_activation": 4.9969,
+      "fired_token_count": 1,
+      "concept_label": "Scientific Concepts"
+    },
+    {
+      "feature_id": 1705,
+      "max_activation": 4.9793,
+      "avg_activation": 4.9793,
+      "fired_token_count": 1,
+      "concept_label": "Environmental Topics"
+    },
+    {
+      "feature_id": 3510,
+      "max_activation": 4.9206,
+      "avg_activation": 4.9206,
+      "fired_token_count": 1,
+      "concept_label": "Corporate Entities"
+    },
+    {
+      "feature_id": 1292,
+      "max_activation": 4.9112,
+      "avg_activation": 4.9112,
+      "fired_token_count": 1,
+      "concept_label": "Product Announcement"
+    },
+    {
+      "feature_id": 635,
+      "max_activation": 4.9111,
+      "avg_activation": 4.9111,
+      "fired_token_count": 1,
+      "concept_label": "Geopolitical"
+    },
+    {
+      "feature_id": 451,
+      "max_activation": 4.8508,
+      "avg_activation": 4.8508,
+      "fired_token_count": 1,
+      "concept_label": "Tech Release"
+    },
+    {
+      "feature_id": 3068,
+      "max_activation": 4.8439,
+      "avg_activation": 4.8439,
+      "fired_token_count": 1,
+      "concept_label": "Action Verbs"
+    },
+    {
+      "feature_id": 3092,
+      "max_activation": 4.8375,
+      "avg_activation": 4.8375,
+      "fired_token_count": 1,
+      "concept_label": "Product Announcement"
+    },
+    {
+      "feature_id": 3399,
+      "max_activation": 4.7314,
+      "avg_activation": 4.7314,
+      "fired_token_count": 1,
+      "concept_label": "Attributive Adjectives"
+    },
+    {
+      "feature_id": 498,
+      "max_activation": 4.6949,
+      "avg_activation": 4.6949,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Positive"
+    },
+    {
+      "feature_id": 2908,
+      "max_activation": 4.6847,
+      "avg_activation": 4.6847,
+      "fired_token_count": 1,
+      "concept_label": "Abstract Reasoning"
+    },
+    {
+      "feature_id": 1090,
+      "max_activation": 4.6808,
+      "avg_activation": 4.6808,
+      "fired_token_count": 1,
+      "concept_label": "Consumer Electronics"
+    },
+    {
+      "feature_id": 3737,
+      "max_activation": 4.6378,
+      "avg_activation": 4.6378,
+      "fired_token_count": 1,
+      "concept_label": "Supply Chain"
+    },
+    {
+      "feature_id": 1900,
+      "max_activation": 4.6081,
+      "avg_activation": 4.6081,
+      "fired_token_count": 1,
+      "concept_label": "Consumer Electronics"
+    },
+    {
+      "feature_id": 1201,
+      "max_activation": 4.592,
+      "avg_activation": 4.592,
+      "fired_token_count": 1,
+      "concept_label": "Tech Release"
+    },
+    {
+      "feature_id": 1907,
+      "max_activation": 4.5679,
+      "avg_activation": 4.5679,
+      "fired_token_count": 1,
+      "concept_label": "Supply Chain"
+    },
+    {
+      "feature_id": 1771,
+      "max_activation": 4.4966,
+      "avg_activation": 4.4966,
+      "fired_token_count": 1,
+      "concept_label": "Tech Release"
+    },
+    {
+      "feature_id": 1347,
+      "max_activation": 4.4749,
+      "avg_activation": 4.4749,
+      "fired_token_count": 1,
+      "concept_label": "Economic Indicators"
+    },
+    {
+      "feature_id": 1308,
+      "max_activation": 4.4413,
+      "avg_activation": 4.4413,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Positive"
+    },
+    {
+      "feature_id": 609,
+      "max_activation": 4.4358,
+      "avg_activation": 4.4358,
+      "fired_token_count": 1,
+      "concept_label": "Attributive Adjectives"
+    },
+    {
+      "feature_id": 8,
+      "max_activation": 4.4205,
+      "avg_activation": 4.4205,
+      "fired_token_count": 1,
+      "concept_label": "Action Verbs"
+    },
+    {
+      "feature_id": 2450,
+      "max_activation": 4.4147,
+      "avg_activation": 4.4147,
+      "fired_token_count": 1,
+      "concept_label": "Scientific Concepts"
+    },
+    {
+      "feature_id": 3480,
+      "max_activation": 4.4043,
+      "avg_activation": 3.0074,
+      "fired_token_count": 2,
+      "concept_label": "Corporate Entities"
+    },
+    {
+      "feature_id": 2744,
+      "max_activation": 4.2648,
+      "avg_activation": 4.2648,
+      "fired_token_count": 1,
+      "concept_label": "Innovation & R&D"
+    },
+    {
+      "feature_id": 652,
+      "max_activation": 4.2517,
+      "avg_activation": 4.2517,
+      "fired_token_count": 1,
+      "concept_label": "Sports & Recreation"
+    },
+    {
+      "feature_id": 1604,
+      "max_activation": 4.1067,
+      "avg_activation": 4.1067,
+      "fired_token_count": 1,
+      "concept_label": "Innovation & R&D"
+    },
+    {
+      "feature_id": 3139,
+      "max_activation": 4.0892,
+      "avg_activation": 4.0892,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Negative"
+    },
+    {
+      "feature_id": 853,
+      "max_activation": 3.9349,
+      "avg_activation": 3.9349,
+      "fired_token_count": 1,
+      "concept_label": "Market Dynamics"
+    },
+    {
+      "feature_id": 227,
+      "max_activation": 3.8602,
+      "avg_activation": 3.8602,
+      "fired_token_count": 1,
+      "concept_label": "Supply Chain"
+    },
+    {
+      "feature_id": 146,
+      "max_activation": 3.7927,
+      "avg_activation": 3.7927,
+      "fired_token_count": 1,
+      "concept_label": "Political Discourse"
+    },
+    {
+      "feature_id": 2903,
+      "max_activation": 3.7868,
+      "avg_activation": 3.7868,
+      "fired_token_count": 1,
+      "concept_label": "Cultural References"
+    },
+    {
+      "feature_id": 2904,
+      "max_activation": 3.6614,
+      "avg_activation": 3.6614,
+      "fired_token_count": 1,
+      "concept_label": "Medical & Health"
+    },
+    {
+      "feature_id": 3118,
+      "max_activation": 3.6424,
+      "avg_activation": 3.6424,
+      "fired_token_count": 1,
+      "concept_label": "Abstract Reasoning"
+    },
+    {
+      "feature_id": 1777,
+      "max_activation": 3.6356,
+      "avg_activation": 3.6356,
+      "fired_token_count": 1,
+      "concept_label": "Numeric Values"
+    },
+    {
+      "feature_id": 2535,
+      "max_activation": 3.6201,
+      "avg_activation": 3.6201,
+      "fired_token_count": 1,
+      "concept_label": "Media & Press"
+    },
+    {
+      "feature_id": 2503,
+      "max_activation": 3.6157,
+      "avg_activation": 3.6157,
+      "fired_token_count": 1,
+      "concept_label": "Market Dynamics"
+    },
+    {
+      "feature_id": 3658,
+      "max_activation": 3.5845,
+      "avg_activation": 3.5845,
+      "fired_token_count": 1,
+      "concept_label": "Abstract Reasoning"
+    },
+    {
+      "feature_id": 3303,
+      "max_activation": 3.5423,
+      "avg_activation": 3.5423,
+      "fired_token_count": 1,
+      "concept_label": "Financial News"
+    },
+    {
+      "feature_id": 1274,
+      "max_activation": 3.5406,
+      "avg_activation": 3.5406,
+      "fired_token_count": 1,
+      "concept_label": "Innovation & R&D"
+    },
+    {
+      "feature_id": 3305,
+      "max_activation": 3.5047,
+      "avg_activation": 3.5047,
+      "fired_token_count": 1,
+      "concept_label": "Geopolitical"
+    },
+    {
+      "feature_id": 782,
+      "max_activation": 3.4135,
+      "avg_activation": 3.4135,
+      "fired_token_count": 1,
+      "concept_label": "Product Announcement"
+    },
+    {
+      "feature_id": 1431,
+      "max_activation": 3.4089,
+      "avg_activation": 3.4089,
+      "fired_token_count": 1,
+      "concept_label": "Historical References"
+    },
+    {
+      "feature_id": 980,
+      "max_activation": 3.3286,
+      "avg_activation": 3.3286,
+      "fired_token_count": 1,
+      "concept_label": "Scientific Concepts"
+    },
+    {
+      "feature_id": 2496,
+      "max_activation": 3.3207,
+      "avg_activation": 3.3207,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 1845,
+      "max_activation": 3.2943,
+      "avg_activation": 3.2943,
+      "fired_token_count": 1,
+      "concept_label": "Media & Press"
+    },
+    {
+      "feature_id": 3762,
+      "max_activation": 3.2769,
+      "avg_activation": 3.2769,
+      "fired_token_count": 1,
+      "concept_label": "Software Ecosystem"
+    },
+    {
+      "feature_id": 3845,
+      "max_activation": 3.2659,
+      "avg_activation": 3.2659,
+      "fired_token_count": 1,
+      "concept_label": "Geopolitical"
+    },
+    {
+      "feature_id": 200,
+      "max_activation": 3.2513,
+      "avg_activation": 3.2513,
+      "fired_token_count": 1,
+      "concept_label": "Scientific Concepts"
+    },
+    {
+      "feature_id": 2001,
+      "max_activation": 3.2342,
+      "avg_activation": 3.2342,
+      "fired_token_count": 1,
+      "concept_label": "Historical References"
+    },
+    {
+      "feature_id": 1144,
+      "max_activation": 3.2328,
+      "avg_activation": 3.2328,
+      "fired_token_count": 1,
+      "concept_label": "Named Persons"
+    },
+    {
+      "feature_id": 2380,
+      "max_activation": 3.218,
+      "avg_activation": 3.218,
+      "fired_token_count": 1,
+      "concept_label": "Consumer Electronics"
+    },
+    {
+      "feature_id": 2116,
+      "max_activation": 3.1611,
+      "avg_activation": 3.1611,
+      "fired_token_count": 1,
+      "concept_label": "Legal & Regulatory"
+    },
+    {
+      "feature_id": 3989,
+      "max_activation": 3.1554,
+      "avg_activation": 3.1554,
+      "fired_token_count": 1,
+      "concept_label": "Logical Connectives"
+    },
+    {
+      "feature_id": 649,
+      "max_activation": 3.0881,
+      "avg_activation": 3.0881,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Negative"
+    },
+    {
+      "feature_id": 3595,
+      "max_activation": 3.0507,
+      "avg_activation": 3.0507,
+      "fired_token_count": 1,
+      "concept_label": "Environmental Topics"
+    },
+    {
+      "feature_id": 3249,
+      "max_activation": 2.963,
+      "avg_activation": 2.963,
+      "fired_token_count": 1,
+      "concept_label": "Attributive Adjectives"
+    },
+    {
+      "feature_id": 1478,
+      "max_activation": 2.9305,
+      "avg_activation": 2.9305,
+      "fired_token_count": 1,
+      "concept_label": "Action Verbs"
+    },
+    {
+      "feature_id": 118,
+      "max_activation": 2.9,
+      "avg_activation": 2.9,
+      "fired_token_count": 1,
+      "concept_label": "Abstract Reasoning"
+    },
+    {
+      "feature_id": 2084,
+      "max_activation": 2.8883,
+      "avg_activation": 2.8883,
+      "fired_token_count": 1,
+      "concept_label": "Innovation & R&D"
+    },
+    {
+      "feature_id": 4069,
+      "max_activation": 2.8565,
+      "avg_activation": 2.8565,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Negative"
+    },
+    {
+      "feature_id": 1439,
+      "max_activation": 2.8451,
+      "avg_activation": 2.8451,
+      "fired_token_count": 1,
+      "concept_label": "Logical Connectives"
+    },
+    {
+      "feature_id": 2789,
+      "max_activation": 2.8197,
+      "avg_activation": 2.8197,
+      "fired_token_count": 1,
+      "concept_label": "Logical Connectives"
+    },
+    {
+      "feature_id": 1596,
+      "max_activation": 2.8044,
+      "avg_activation": 2.8044,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 3918,
+      "max_activation": 2.7765,
+      "avg_activation": 2.7765,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Positive"
+    },
+    {
+      "feature_id": 1577,
+      "max_activation": 2.7569,
+      "avg_activation": 2.7569,
+      "fired_token_count": 1,
+      "concept_label": "Supply Chain"
+    },
+    {
+      "feature_id": 3356,
+      "max_activation": 2.7338,
+      "avg_activation": 2.7338,
+      "fired_token_count": 1,
+      "concept_label": "Political Discourse"
+    },
+    {
+      "feature_id": 3709,
+      "max_activation": 2.7275,
+      "avg_activation": 2.7275,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Negative"
+    },
+    {
+      "feature_id": 3631,
+      "max_activation": 2.6893,
+      "avg_activation": 2.6893,
+      "fired_token_count": 1,
+      "concept_label": "Tech Release"
+    },
+    {
+      "feature_id": 3517,
+      "max_activation": 2.6708,
+      "avg_activation": 2.6708,
+      "fired_token_count": 1,
+      "concept_label": "Numeric Values"
+    },
+    {
+      "feature_id": 2988,
+      "max_activation": 2.6431,
+      "avg_activation": 2.6431,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Positive"
+    },
+    {
+      "feature_id": 3842,
+      "max_activation": 2.5998,
+      "avg_activation": 2.5998,
+      "fired_token_count": 1,
+      "concept_label": "Product Announcement"
+    },
+    {
+      "feature_id": 3716,
+      "max_activation": 2.5835,
+      "avg_activation": 2.5835,
+      "fired_token_count": 1,
+      "concept_label": "Political Discourse"
+    },
+    {
+      "feature_id": 833,
+      "max_activation": 2.5738,
+      "avg_activation": 2.5738,
+      "fired_token_count": 1,
+      "concept_label": "Cultural References"
+    },
+    {
+      "feature_id": 3253,
+      "max_activation": 2.5524,
+      "avg_activation": 2.5524,
+      "fired_token_count": 1,
+      "concept_label": "Market Dynamics"
+    },
+    {
+      "feature_id": 740,
+      "max_activation": 2.541,
+      "avg_activation": 2.541,
+      "fired_token_count": 1,
+      "concept_label": "Scientific Concepts"
+    },
+    {
+      "feature_id": 3780,
+      "max_activation": 2.4977,
+      "avg_activation": 2.4977,
+      "fired_token_count": 1,
+      "concept_label": "Corporate Entities"
+    },
+    {
+      "feature_id": 780,
+      "max_activation": 2.4868,
+      "avg_activation": 2.4868,
+      "fired_token_count": 1,
+      "concept_label": "Corporate Entities"
+    },
+    {
+      "feature_id": 989,
+      "max_activation": 2.4393,
+      "avg_activation": 2.4393,
+      "fired_token_count": 1,
+      "concept_label": "Logical Connectives"
+    },
+    {
+      "feature_id": 2100,
+      "max_activation": 2.2053,
+      "avg_activation": 2.2053,
+      "fired_token_count": 1,
+      "concept_label": "Corporate Entities"
+    },
+    {
+      "feature_id": 2060,
+      "max_activation": 2.1991,
+      "avg_activation": 2.1991,
+      "fired_token_count": 1,
+      "concept_label": "Scientific Concepts"
+    },
+    {
+      "feature_id": 1054,
+      "max_activation": 2.1891,
+      "avg_activation": 2.1891,
+      "fired_token_count": 1,
+      "concept_label": "Named Persons"
+    },
+    {
+      "feature_id": 2336,
+      "max_activation": 2.1647,
+      "avg_activation": 2.1647,
+      "fired_token_count": 1,
+      "concept_label": "Political Discourse"
+    },
+    {
+      "feature_id": 3674,
+      "max_activation": 2.1088,
+      "avg_activation": 2.1088,
+      "fired_token_count": 1,
+      "concept_label": "Innovation & R&D"
+    },
+    {
+      "feature_id": 2788,
+      "max_activation": 2.0983,
+      "avg_activation": 2.0983,
+      "fired_token_count": 1,
+      "concept_label": "Abstract Reasoning"
+    },
+    {
+      "feature_id": 1525,
+      "max_activation": 2.0983,
+      "avg_activation": 2.0983,
+      "fired_token_count": 1,
+      "concept_label": "Environmental Topics"
+    },
+    {
+      "feature_id": 2397,
+      "max_activation": 2.0813,
+      "avg_activation": 2.0813,
+      "fired_token_count": 1,
+      "concept_label": "Economic Indicators"
+    },
+    {
+      "feature_id": 2447,
+      "max_activation": 2.0407,
+      "avg_activation": 2.0407,
+      "fired_token_count": 1,
+      "concept_label": "Supply Chain"
+    },
+    {
+      "feature_id": 2171,
+      "max_activation": 2.0256,
+      "avg_activation": 2.0256,
+      "fired_token_count": 1,
+      "concept_label": "Brand Names"
+    },
+    {
+      "feature_id": 3976,
+      "max_activation": 1.9907,
+      "avg_activation": 1.9907,
+      "fired_token_count": 1,
+      "concept_label": "Legal & Regulatory"
+    },
+    {
+      "feature_id": 1290,
+      "max_activation": 1.8943,
+      "avg_activation": 1.8943,
+      "fired_token_count": 1,
+      "concept_label": "Corporate Entities"
+    },
+    {
+      "feature_id": 3192,
+      "max_activation": 1.8883,
+      "avg_activation": 1.8883,
+      "fired_token_count": 1,
+      "concept_label": "Software Ecosystem"
+    },
+    {
+      "feature_id": 1159,
+      "max_activation": 1.8775,
+      "avg_activation": 1.8775,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Negative"
+    },
+    {
+      "feature_id": 3551,
+      "max_activation": 1.8053,
+      "avg_activation": 1.8053,
+      "fired_token_count": 1,
+      "concept_label": "Brand Names"
+    },
+    {
+      "feature_id": 3183,
+      "max_activation": 1.7607,
+      "avg_activation": 1.7607,
+      "fired_token_count": 1,
+      "concept_label": "Financial News"
+    },
+    {
+      "feature_id": 288,
+      "max_activation": 1.7588,
+      "avg_activation": 1.7588,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Positive"
+    },
+    {
+      "feature_id": 1533,
+      "max_activation": 1.7347,
+      "avg_activation": 1.7347,
+      "fired_token_count": 1,
+      "concept_label": "Financial News"
+    },
+    {
+      "feature_id": 1120,
+      "max_activation": 1.6683,
+      "avg_activation": 1.6683,
+      "fired_token_count": 1,
+      "concept_label": "Consumer Electronics"
+    },
+    {
+      "feature_id": 807,
+      "max_activation": 1.6401,
+      "avg_activation": 1.6401,
+      "fired_token_count": 1,
+      "concept_label": "Economic Indicators"
+    },
+    {
+      "feature_id": 767,
+      "max_activation": 1.6205,
+      "avg_activation": 1.6205,
+      "fired_token_count": 1,
+      "concept_label": "Supply Chain"
+    },
+    {
+      "feature_id": 3245,
+      "max_activation": 1.5645,
+      "avg_activation": 1.5645,
+      "fired_token_count": 1,
+      "concept_label": "Geopolitical"
+    },
+    {
+      "feature_id": 3293,
+      "max_activation": 1.5567,
+      "avg_activation": 1.5567,
+      "fired_token_count": 1,
+      "concept_label": "Cultural References"
+    },
+    {
+      "feature_id": 4095,
+      "max_activation": 1.5072,
+      "avg_activation": 1.5072,
+      "fired_token_count": 1,
+      "concept_label": "Media & Press"
+    },
+    {
+      "feature_id": 515,
+      "max_activation": 1.4576,
+      "avg_activation": 1.4576,
+      "fired_token_count": 1,
+      "concept_label": "Geopolitical"
+    },
+    {
+      "feature_id": 2544,
+      "max_activation": 1.4101,
+      "avg_activation": 1.4101,
+      "fired_token_count": 1,
+      "concept_label": "Medical & Health"
+    },
+    {
+      "feature_id": 2260,
+      "max_activation": 1.3444,
+      "avg_activation": 1.3444,
+      "fired_token_count": 1,
+      "concept_label": "Consumer Electronics"
+    },
+    {
+      "feature_id": 62,
+      "max_activation": 1.2363,
+      "avg_activation": 1.2363,
+      "fired_token_count": 1,
+      "concept_label": "Product Announcement"
+    },
+    {
+      "feature_id": 1671,
+      "max_activation": 1.2106,
+      "avg_activation": 1.2106,
+      "fired_token_count": 1,
+      "concept_label": "Historical References"
+    },
+    {
+      "feature_id": 2167,
+      "max_activation": 1.1951,
+      "avg_activation": 1.1951,
+      "fired_token_count": 1,
+      "concept_label": "Numeric Values"
+    },
+    {
+      "feature_id": 3757,
+      "max_activation": 1.1937,
+      "avg_activation": 1.1937,
+      "fired_token_count": 1,
+      "concept_label": "Numeric Values"
+    },
+    {
+      "feature_id": 482,
+      "max_activation": 1.1506,
+      "avg_activation": 1.1506,
+      "fired_token_count": 1,
+      "concept_label": "Product Announcement"
+    },
+    {
+      "feature_id": 2446,
+      "max_activation": 1.1082,
+      "avg_activation": 1.1082,
+      "fired_token_count": 1,
+      "concept_label": "Legal & Regulatory"
+    },
+    {
+      "feature_id": 2549,
+      "max_activation": 1.0864,
+      "avg_activation": 1.0864,
+      "fired_token_count": 1,
+      "concept_label": "Logical Connectives"
+    },
+    {
+      "feature_id": 1487,
+      "max_activation": 1.0826,
+      "avg_activation": 1.0826,
+      "fired_token_count": 1,
+      "concept_label": "Supply Chain"
+    },
+    {
+      "feature_id": 543,
+      "max_activation": 0.9968,
+      "avg_activation": 0.9968,
+      "fired_token_count": 1,
+      "concept_label": "Financial News"
+    },
+    {
+      "feature_id": 1272,
+      "max_activation": 0.9575,
+      "avg_activation": 0.9575,
+      "fired_token_count": 1,
+      "concept_label": "Software Ecosystem"
+    },
+    {
+      "feature_id": 1554,
+      "max_activation": 0.9534,
+      "avg_activation": 0.9534,
+      "fired_token_count": 1,
+      "concept_label": "Medical & Health"
+    },
+    {
+      "feature_id": 3846,
+      "max_activation": 0.9383,
+      "avg_activation": 0.9383,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 1339,
+      "max_activation": 0.9268,
+      "avg_activation": 0.9268,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Negative"
+    },
+    {
+      "feature_id": 2888,
+      "max_activation": 0.9168,
+      "avg_activation": 0.9168,
+      "fired_token_count": 1,
+      "concept_label": "Action Verbs"
+    },
+    {
+      "feature_id": 2734,
+      "max_activation": 0.8807,
+      "avg_activation": 0.8807,
+      "fired_token_count": 1,
+      "concept_label": "Named Persons"
+    },
+    {
+      "feature_id": 3267,
+      "max_activation": 0.8719,
+      "avg_activation": 0.8719,
+      "fired_token_count": 1,
+      "concept_label": "Economic Indicators"
+    },
+    {
+      "feature_id": 2889,
+      "max_activation": 0.854,
+      "avg_activation": 0.854,
+      "fired_token_count": 1,
+      "concept_label": "Attributive Adjectives"
+    },
+    {
+      "feature_id": 759,
+      "max_activation": 0.8308,
+      "avg_activation": 0.8308,
+      "fired_token_count": 1,
+      "concept_label": "Attributive Adjectives"
+    },
+    {
+      "feature_id": 3831,
+      "max_activation": 0.8295,
+      "avg_activation": 0.8295,
+      "fired_token_count": 1,
+      "concept_label": "Historical References"
+    },
+    {
+      "feature_id": 820,
+      "max_activation": 0.8174,
+      "avg_activation": 0.8174,
+      "fired_token_count": 1,
+      "concept_label": "Consumer Electronics"
+    },
+    {
+      "feature_id": 3960,
+      "max_activation": 0.8041,
+      "avg_activation": 0.8041,
+      "fired_token_count": 1,
+      "concept_label": "Corporate Entities"
+    },
+    {
+      "feature_id": 1704,
+      "max_activation": 0.8029,
+      "avg_activation": 0.8029,
+      "fired_token_count": 1,
+      "concept_label": "Medical & Health"
+    },
+    {
+      "feature_id": 657,
+      "max_activation": 0.7987,
+      "avg_activation": 0.7987,
+      "fired_token_count": 1,
+      "concept_label": "Economic Indicators"
+    },
+    {
+      "feature_id": 3057,
+      "max_activation": 0.7764,
+      "avg_activation": 0.7764,
+      "fired_token_count": 1,
+      "concept_label": "Economic Indicators"
+    },
+    {
+      "feature_id": 156,
+      "max_activation": 0.7595,
+      "avg_activation": 0.7595,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 3259,
+      "max_activation": 0.7242,
+      "avg_activation": 0.7242,
+      "fired_token_count": 1,
+      "concept_label": "Sentiment — Negative"
+    },
+    {
+      "feature_id": 3127,
+      "max_activation": 0.7122,
+      "avg_activation": 0.7122,
+      "fired_token_count": 1,
+      "concept_label": "Numeric Values"
+    },
+    {
+      "feature_id": 3382,
+      "max_activation": 0.6894,
+      "avg_activation": 0.6894,
+      "fired_token_count": 1,
+      "concept_label": "Sports & Recreation"
+    },
+    {
+      "feature_id": 1592,
+      "max_activation": 0.6708,
+      "avg_activation": 0.6708,
+      "fired_token_count": 1,
+      "concept_label": "Product Announcement"
+    },
+    {
+      "feature_id": 3196,
+      "max_activation": 0.6703,
+      "avg_activation": 0.6703,
+      "fired_token_count": 1,
+      "concept_label": "Legal & Regulatory"
+    },
+    {
+      "feature_id": 1924,
+      "max_activation": 0.6245,
+      "avg_activation": 0.6245,
+      "fired_token_count": 1,
+      "concept_label": "Named Persons"
+    },
+    {
+      "feature_id": 2031,
+      "max_activation": 0.5852,
+      "avg_activation": 0.5852,
+      "fired_token_count": 1,
+      "concept_label": "Historical References"
+    },
+    {
+      "feature_id": 3426,
+      "max_activation": 0.5612,
+      "avg_activation": 0.5612,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 2117,
+      "max_activation": 0.5593,
+      "avg_activation": 0.5593,
+      "fired_token_count": 1,
+      "concept_label": "Supply Chain"
+    },
+    {
+      "feature_id": 696,
+      "max_activation": 0.5298,
+      "avg_activation": 0.5298,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 2922,
+      "max_activation": 0.4889,
+      "avg_activation": 0.4889,
+      "fired_token_count": 1,
+      "concept_label": "Software Ecosystem"
+    },
+    {
+      "feature_id": 3452,
+      "max_activation": 0.4348,
+      "avg_activation": 0.4348,
+      "fired_token_count": 1,
+      "concept_label": "Product Announcement"
+    },
+    {
+      "feature_id": 1986,
+      "max_activation": 0.4273,
+      "avg_activation": 0.4273,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 1995,
+      "max_activation": 0.4167,
+      "avg_activation": 0.4167,
+      "fired_token_count": 1,
+      "concept_label": "Media & Press"
+    },
+    {
+      "feature_id": 1040,
+      "max_activation": 0.3711,
+      "avg_activation": 0.3711,
+      "fired_token_count": 1,
+      "concept_label": "Scientific Concepts"
+    },
+    {
+      "feature_id": 1806,
+      "max_activation": 0.3467,
+      "avg_activation": 0.3467,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 981,
+      "max_activation": 0.3363,
+      "avg_activation": 0.3363,
+      "fired_token_count": 1,
+      "concept_label": "Historical References"
+    },
+    {
+      "feature_id": 3126,
+      "max_activation": 0.3063,
+      "avg_activation": 0.3063,
+      "fired_token_count": 1,
+      "concept_label": "Temporal Markers"
+    },
+    {
+      "feature_id": 2521,
+      "max_activation": 0.2024,
+      "avg_activation": 0.2024,
+      "fired_token_count": 1,
+      "concept_label": "Tech Release"
+    },
+    {
+      "feature_id": 1526,
+      "max_activation": 0.1983,
+      "avg_activation": 0.1983,
+      "fired_token_count": 1,
+      "concept_label": "Political Discourse"
+    }
+  ]
+}
