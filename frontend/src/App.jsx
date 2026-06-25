@@ -33,7 +33,7 @@ export default function App() {
       });
 
     // Also ping root for pipeline mode
-    fetch(`${API_BASE}/`)
+    fetch(`${API_BASE}/`, { credentials: 'include' })
       .then((r) => r.json())
       .then((d) => setPipelineMode(d.pipeline_mode))
       .catch(() => setPipelineMode('offline'));
