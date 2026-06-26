@@ -2,7 +2,7 @@ import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Dict
 
-NEURONPEDIA_API_KEY = "sk-np-zFNEKNq3NLTEHxuxOyju47xq1WAbwzcuYBTJPBBPYlg0"
+NEURONPEDIA_API_KEY = ""
 NEURONPEDIA_BASE_URL = "https://www.neuronpedia.org/api/feature"
 
 # Cache to avoid redundant API calls
