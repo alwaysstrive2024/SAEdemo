@@ -61,6 +61,7 @@ def vram_clear() -> None:
             used_mb = torch.cuda.memory_allocated() / 1024 ** 2
             print(f"[VRAM] 🧹 Cleared — allocated: {used_mb:.1f} MB")
             return
+        
     except ImportError:
         pass
     print("[VRAM] 🧹 CPU mode — gc.collect() called")
