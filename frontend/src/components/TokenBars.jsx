@@ -1,128 +1,140 @@
 import { useMemo } from 'react';
-import { Zap } from 'lucide-react';
+import { Hash, Flame } from 'lucide-react';
 
 /**
- * TokenBars
- * Ranked horizontal bar chart of the top-K tokens by peak SAE feature activation.
+ * FeatureBars
+ * Top-K SAE global feature firing bars, drawn from report_1_global.
+ * Shows: Feature ID · Concept Label · max_activation bar · avg · fired_token_count
  *
  * Props:
  *   modelData  — full model data object
- *   modelColor — color tokens
- *   topK       — number of top tokens to display
+ *   modelColor — color tokens from constants.js
+ *   topK       — number of top features to display
  */
-export default function TokenBars({ modelData, modelColor, topK }) {
-  const tokenRows = useMemo(() => {
-    const firings = modelData?.report_2_per_token?.token_level_firings ?? [];
-
-    // For each token, find the max activation across its top features
-    const rows = firings.map((t) => {
-      const maxAct = t.top_50_features?.[0]?.activation ?? 0;
-      const topLabel = t.top_50_features?.[0]?.concept_label ?? '—';
-      return {
-        token: t.token_string,
-        index: t.token_index,
-        maxAct,
-        topLabel,
-        featureId: t.top_50_features?.[0]?.feature_id ?? null,
-      };
-    });
-
-    // Sort by maxAct descending, take topK
-    return rows.sort((a, b) => b.maxAct - a.maxAct).slice(0, topK);
+export default function FeatureBars({ modelData, modelColor, topK }) {
+  const featureRows = useMemo(() => {
+    const summary = modelData?.report_1_global?.fired_features_summary ?? [];
+    // Already sorted by max_activation desc from backend; just slice topK
+    return summary.slice(0, topK);
   }, [modelData, topK]);
 
   const globalMax = useMemo(
-    () => Math.max(...tokenRows.map((r) => r.maxAct), 1),
-    [tokenRows]
+    () => Math.max(...featureRows.map((f) => f.max_activation), 1),
+    [featureRows]
   );
 
-  if (!tokenRows.length) {
+  if (!featureRows.length) {
     return (
-      <div className="text-white/20 text-sm text-center py-6">No activation data</div>
+      <div className="text-white/20 text-sm text-center py-6">No feature data</div>
     );
   }
 
   return (
-    <div className="space-y-1.5">
-      {tokenRows.map((row, i) => {
-        const pct = (row.maxAct / globalMax) * 100;
+    <div className="space-y-2">
+      {/* Column header */}
+      <div className="flex items-center gap-2 pb-1 border-b border-white/[0.06]">
+        <span className="mono text-[9px] text-white/25 w-12 flex-shrink-0">Feature</span>
+        <span className="mono text-[9px] text-white/25 flex-1">Concept · max activation</span>
+        <span className="mono text-[9px] text-white/25 w-8 text-right flex-shrink-0">Tkns</span>
+      </div>
+
+      {featureRows.map((feat, i) => {
+        const pct = (feat.max_activation / globalMax) * 100;
+        const isTop = i === 0;
+
         return (
           <div
-            key={`${row.index}-${i}`}
+            key={feat.feature_id}
             className="group flex items-center gap-2 animate-fade-up"
-            style={{ animationDelay: `${i * 30}ms` }}
+            style={{ animationDelay: `${i * 28}ms` }}
           >
-            {/* Rank */}
+            {/* Feature ID chip */}
             <span
-              className="mono text-[9px] font-bold w-4 text-right flex-shrink-0"
-              style={{ color: i === 0 ? modelColor.accent : 'rgba(255,255,255,0.25)' }}
-            >
-              {i + 1}
-            </span>
-
-            {/* Token chip */}
-            <span
-              className="mono text-[10px] font-semibold px-1.5 py-0.5 rounded-md flex-shrink-0 min-w-[40px] text-center"
+              className="mono text-[9px] font-bold w-12 flex-shrink-0 px-1 py-0.5 rounded-md text-center truncate"
               style={{
-                background: i === 0 ? modelColor.bg : 'rgba(255,255,255,0.04)',
-                border: `1px solid ${i === 0 ? modelColor.border : 'rgba(255,255,255,0.07)'}`,
-                color: i === 0 ? modelColor.text : 'rgba(255,255,255,0.6)',
-                maxWidth: '72px',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
+                background: isTop ? modelColor.bg : 'rgba(255,255,255,0.03)',
+                border: `1px solid ${isTop ? modelColor.border : 'rgba(255,255,255,0.06)'}`,
+                color: isTop ? modelColor.text : 'rgba(255,255,255,0.35)',
               }}
-              title={row.token}
+              title={`Feature #${feat.feature_id}`}
             >
-              {row.token}
+              #{feat.feature_id}
             </span>
 
-            {/* Bar */}
-            <div
-              className="relative flex-1 h-4 rounded-md overflow-hidden"
-              style={{ background: 'rgba(255,255,255,0.04)' }}
-            >
-              {/* Fill */}
-              <div
-                className="absolute left-0 top-0 h-full rounded-md animate-progress-fill"
-                style={{
-                  '--fill-width': `${pct}%`,
-                  width: `${pct}%`,
-                  background: modelColor.gradientBar,
-                  opacity: 0.75 + (pct / 100) * 0.25,
-                  backgroundSize: '200% auto',
-                }}
-              />
-              {/* Shimmer overlay on top bar */}
-              {i === 0 && (
-                <div
-                  className="absolute inset-0 animate-shimmer opacity-30"
-                  style={{
-                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
-                    backgroundSize: '200% auto',
-                  }}
-                />
-              )}
-              {/* Activation value */}
+            {/* Bar + label */}
+            <div className="flex-1 flex flex-col gap-0.5">
+              {/* Concept label */}
               <span
-                className="absolute right-2 top-1/2 -translate-y-1/2 mono text-[9px] font-semibold text-white/70"
+                className="text-[10px] font-medium leading-none truncate"
+                style={{ color: isTop ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.55)' }}
+                title={feat.concept_label}
               >
-                {row.maxAct.toFixed(2)}
+                {feat.concept_label}
               </span>
+
+              {/* Bar row */}
+              <div className="flex items-center gap-1.5">
+                <div
+                  className="relative flex-1 h-3 rounded-md overflow-hidden"
+                  style={{ background: 'rgba(255,255,255,0.04)' }}
+                >
+                  {/* Fill */}
+                  <div
+                    className="absolute left-0 top-0 h-full rounded-md animate-progress-fill"
+                    style={{
+                      '--fill-width': `${pct}%`,
+                      width: `${pct}%`,
+                      background: modelColor.gradientBar,
+                      opacity: 0.65 + (pct / 100) * 0.35,
+                      backgroundSize: '200% auto',
+                    }}
+                  />
+                  {/* Shimmer on rank-1 */}
+                  {isTop && (
+                    <div
+                      className="absolute inset-0 animate-shimmer opacity-25"
+                      style={{
+                        background:
+                          'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)',
+                        backgroundSize: '200% auto',
+                      }}
+                    />
+                  )}
+                </div>
+
+                {/* max / avg values */}
+                <span className="mono text-[9px] text-white/50 flex-shrink-0 flex items-center gap-1">
+                  <Flame size={8} style={{ color: modelColor.accent }} />
+                  {feat.max_activation.toFixed(2)}
+                  <span className="text-white/20">
+                    avg {feat.avg_activation.toFixed(2)}
+                  </span>
+                </span>
+              </div>
             </div>
 
-            {/* Top concept label (appears on hover) */}
+            {/* fired_token_count badge */}
             <span
-              className="hidden group-hover:flex items-center gap-1 text-[9px] flex-shrink-0 max-w-[80px] truncate"
-              style={{ color: modelColor.text, opacity: 0.85 }}
-              title={row.topLabel}
+              className="mono text-[9px] w-8 text-right flex-shrink-0 font-semibold"
+              style={{ color: feat.fired_token_count > 1 ? modelColor.text : 'rgba(255,255,255,0.25)' }}
+              title={`Fired in ${feat.fired_token_count} token(s)`}
             >
-              <Zap size={8} />
-              {row.topLabel}
+              {feat.fired_token_count}×
             </span>
           </div>
         );
       })}
+
+      {/* Legend */}
+      <div className="flex items-center gap-3 pt-1 border-t border-white/[0.05] text-[9px] text-white/20">
+        <span className="flex items-center gap-1">
+          <Hash size={8} />Feature ID
+        </span>
+        <span className="flex items-center gap-1">
+          <Flame size={8} />max · avg activation
+        </span>
+        <span className="ml-auto">× = fired token count</span>
+      </div>
     </div>
   );
 }

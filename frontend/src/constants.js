@@ -1,6 +1,5 @@
 // ─── API ────────────────────────────────────────────────────────────────────
-// export const API_BASE = 'http://localhost:8000';
-export const API_BASE = 'https://8000-gpu-g4-s-kkb-euw4a0-1kdtao9e835yx-a.europe-west4-0.prod.colab.dev';
+export const API_BASE = 'http://localhost:8000';
 
 // ─── Per-model colour tokens ─────────────────────────────────────────────────
 export const MODEL_COLORS = {

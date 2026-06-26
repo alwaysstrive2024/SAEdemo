@@ -1,6 +1,6 @@
 import { Download, Layers, GitBranch, Activity } from 'lucide-react';
 import ConceptCluster from './ConceptCluster';
-import TokenBars from './TokenBars';
+import FeatureBars from './TokenBars';
 import TextAttribution from './TextAttribution';
 import { downloadJSON } from '../utils/download';
 
@@ -138,11 +138,11 @@ export default function ModelColumn({ modelKey, data, topK, modelColor }) {
       >
         <SectionLabel
           icon={<span className="text-[10px]">⚡</span>}
-          text={`Top-${topK} Token Activations`}
+          text={`Top-${topK} SAE Feature Firings`}
           color={modelColor}
         />
         <div className="mt-2.5">
-          <TokenBars modelData={data} modelColor={modelColor} topK={topK} />
+          <FeatureBars modelData={data} modelColor={modelColor} topK={topK} />
         </div>
       </div>
 
