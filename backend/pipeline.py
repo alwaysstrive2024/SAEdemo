@@ -19,15 +19,14 @@ import traceback
 from typing import Any, Dict, List, Optional, Tuple
 
 from config import (
-    concept_label,
     layer_from_hook,
     naive_tokenise,
     safe_sae_attr,
     vram_clear,
 )
 from registry import MODEL_REGISTRY
+from neuronpedia import get_concept_labels_batch
 
-# ─────────────────────────────────────────────────────────────────────────────
 # Dependency flags — injected by main.py at startup
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -48,7 +47,6 @@ def set_deps(tl: bool, sae: bool, hf: bool, torch_ok: bool) -> None:
     FULL_PIPELINE   = torch_ok and sae and (tl or hf)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # Config cache  (model_key → resolved config dict)
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -114,6 +112,8 @@ def _resolve_model_config(model_key: str) -> Dict[str, Any]:
         "hook_point":    hook_point,
         "layer":         hook_layer,
         "d_model":       d_model,
+        "np_model_id":   reg.get("np_model_id"),
+        "np_sae_id":     reg.get("np_sae_id"),
     }
 
     del sae_obj
@@ -127,7 +127,6 @@ def _resolve_model_config(model_key: str) -> Dict[str, Any]:
     return config
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # Path A — TransformerLens
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -175,7 +174,6 @@ def _extract_activations_tl(
     return resid, token_strs
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # Path B — HuggingFace + register_forward_hook
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -258,7 +256,6 @@ def _extract_activations_hf(
     return resid, token_strs
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # Report builder  (shared by real and mock pipelines)
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -266,13 +263,23 @@ def _build_reports(
     feature_acts_cpu: Any,
     token_strs: List[str],
     rng: random.Random,
+    np_model_id: str,
+    np_sae_id: str,
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     """
     Convert a (seq_len, d_sae) activation tensor (CPU numpy) into:
       fired_features_summary  — Report 1 global feature list
       token_level_firings     — Report 2 per-token top-50
     """
+    import numpy as _np
     fa = feature_acts_cpu.numpy()  # (seq, d_sae)
+
+    # Find all active feature IDs
+    active_mask = fa > 0
+    active_ids = active_mask.any(axis=0).nonzero()[0].tolist()
+
+    print(f"[Neuronpedia] Fetching labels for {len(active_ids)} unique features...")
+    labels_map = get_concept_labels_batch(np_model_id, np_sae_id, active_ids)
 
     # Report 2 — per-token
     token_level_firings: List[Dict[str, Any]] = []
@@ -287,18 +294,16 @@ def _build_reports(
                 {
                     "feature_id":    fid,
                     "activation":    round(val, 4),
-                    "concept_label": concept_label(fid, rng),
+                    "concept_label": labels_map.get(fid, f"Concept {fid}"),
                 }
                 for fid, val in pairs[:50]
             ],
         })
 
     # Report 1 — global aggregation
-    import numpy as _np
     global_max   = fa.max(axis=0)
     global_sum   = fa.sum(axis=0)
-    global_count = (fa > 0).sum(axis=0)
-    active_ids   = (global_count > 0).nonzero()[0].tolist()
+    global_count = active_mask.sum(axis=0)
 
     fired_features_summary: List[Dict[str, Any]] = sorted([
         {
@@ -306,7 +311,7 @@ def _build_reports(
             "max_activation":   round(float(global_max[fid]), 4),
             "avg_activation":   round(float(global_sum[fid]) / int(global_count[fid]), 4),
             "fired_token_count": int(global_count[fid]),
-            "concept_label":    concept_label(fid, rng),
+            "concept_label":    labels_map.get(fid, f"Concept {fid}"),
         }
         for fid in active_ids
     ], key=lambda x: x["max_activation"], reverse=True)
@@ -314,7 +319,6 @@ def _build_reports(
     return fired_features_summary, token_level_firings
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # Mock pipeline
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -345,6 +349,14 @@ def _mock_analyse_model(
             row[fid] = round(rng.uniform(0.1, 6.5), 4)
         matrix.append(row)
 
+    active_ids = set()
+    for row in matrix:
+        for fid, val in enumerate(row):
+            if val > 0:
+                active_ids.add(fid)
+    
+    labels_map = get_concept_labels_batch(cfg.get("np_model_id"), cfg.get("np_sae_id"), list(active_ids))
+
     # Report 2
     token_level_firings = []
     for tok_idx, tok_str in enumerate(tokens):
@@ -355,7 +367,7 @@ def _mock_analyse_model(
             "token_string":   tok_str,
             "top_50_features": [
                 {"feature_id": fid, "activation": round(val, 4),
-                 "concept_label": concept_label(fid, rng)}
+                 "concept_label": labels_map.get(fid, f"Concept {fid}")}
                 for fid, val in pairs[:50]
             ],
         })
@@ -379,7 +391,7 @@ def _mock_analyse_model(
             "max_activation":   round(s["max"], 4),
             "avg_activation":   round(s["sum"] / s["cnt"], 4),
             "fired_token_count": s["cnt"],
-            "concept_label":    concept_label(fid, rng),
+            "concept_label":    labels_map.get(fid, f"Concept {fid}"),
         }
         for fid, s in stats.items()
     ], key=lambda x: x["max_activation"], reverse=True)
@@ -486,7 +498,7 @@ def _real_analyse_model(
 
     # ── Build reports ─────────────────────────────────────────────────────────
     fired_features_summary, token_level_firings = _build_reports(
-        feature_acts_cpu, token_strs, rng
+        feature_acts_cpu, token_strs, rng, cfg.get("np_model_id"), cfg.get("np_sae_id")
     )
 
     print(f"[REAL | {model_key}] ✅ Done — "

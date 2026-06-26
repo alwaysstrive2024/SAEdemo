@@ -11,7 +11,6 @@ import gc
 import re
 from typing import Any, List, Optional
 
-# ─────────────────────────────────────────────────────────────────────────────
 # Dependency flags (set by main.py after import-time detection)
 # ─────────────────────────────────────────────────────────────────────────────
 # These are populated by main.py at startup so config.py stays import-safe.
@@ -25,7 +24,6 @@ def set_torch_available(flag: bool) -> None:
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Concept label bank
-# ─────────────────────────────────────────────────────────────────────────────
 # Used to assign human-readable labels to SAE feature IDs.
 # Extend freely — the list length does not need to match d_sae.
 
@@ -43,7 +41,6 @@ CONCEPT_LABELS: List[str] = [
 ]
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # Utility functions
 # ─────────────────────────────────────────────────────────────────────────────
 

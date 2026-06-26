@@ -19,3 +19,4 @@ numpy>=1.26.0
 
 # Optional — speeds up HuggingFace model downloads
 huggingface-hub>=0.23.0
+requests

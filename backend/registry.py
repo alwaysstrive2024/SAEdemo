@@ -44,12 +44,14 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "display_name": "Gemma 2B",
         "sae_release":  "gemma-2b-res-jb",
         "sae_id":       "blocks.12.hook_resid_post",
+        "np_model_id":  "gemma-2-2b",
+        "np_sae_id":    "12-res-jb",
     },
 
     # ── Meta Llama 3.2 1B ─────────────────────────────────────────────────────
     "llama-3.2-1b": {
         "display_name": "Llama 3.2 1B",
-        "sae_release":  "llama_3.2_1b-res-jb",
+        "sae_release":  "chanind/llama_3.2_1b-res-jb",
         "sae_id":       "blocks.8.hook_resid_post",
     },
 
@@ -94,6 +96,81 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "sae_release":  "decoderesearch/gemma-4-saes",
         "sae_id":       "gemma-4-31b/btk-mat-layer-30-k-100",
     },
+
+    # —— GPT-2 Small ————————————————————————————————
+    "gpt2-small-l4": {
+        "display_name": "GPT-2 Small(Layer4)",
+        "sae_release":  "gpt2-small-res-jb",
+        "sae_id":       "blocks.4.hook_resid_pre",
+    },
+
+    "gpt2-small-l8": {
+        "display_name": "GPT-2 Small(Layer8)",
+        "sae_release":  "gpt2-small-res-jb",
+        "sae_id":       "blocks.8.hook_resid_pre",
+    },
+
+    "gpt2-small-l12": {
+        "display_name": "GPT-2 Small(Layer12)",
+        "sae_release":  "gpt2-small-res-jb",
+        "sae_id":       "blocks.12.hook_resid_pre",
+    },
+    # ── Olmo 3 7B ─────────────────────────────────────────────
+    "olmo-3-7b-l4": {
+        "display_name": "Olmo 3 7B (Layer 4)",
+        "sae_release":  "decoderesearch/olmo-3-saes",
+        "sae_id":       "olmo-3-1025-7b/btk-mat-layer-4-k-100",
+    },
+
+    "olmo-3-7b-l16": {
+        "display_name": "Olmo 3 7B (Layer 16)",
+        "sae_release":  "decoderesearch/olmo-3-saes",
+        "sae_id":       "olmo-3-1025-7b/btk-mat-layer-16-k-100",
+    },
+
+    "olmo-3-7b-l28": {
+        "display_name": "Olmo 3 7B (Layer 28)",
+        "sae_release":  "decoderesearch/olmo-3-saes",
+        "sae_id":       "olmo-3-1025-7b/btk-mat-layer-28-k-100",
+    },
+
+    # "olmo-3-7b-l31": {
+    #     "display_name": "Olmo 3 7B (Layer 31)",
+    #     "sae_release":  "decoderesearch/olmo-3-saes",
+    #     "sae_id":       "layer_31/width_163k/topk_128_raw",
+    # },
+
+
+    # "olmo-3-7b-l15": {
+    #     "display_name": "Olmo 3 7B (Layer 15)",
+    #     "sae_release":  "dams2005/olmo-3-7b-think-saes",
+    #     "sae_id":       "layer_15/width_163k/topk_64_raw",
+    # },
+
+
+    # —— Deepseek R1 ————————————————————————————————
+    "deepseek-r1(llama-distill)": {
+        "display_name": "Deepseek R1(llama-distill) (Layer 19)",
+        "sae_release":  "andreuka18/sae-deepseek-r1-llama-8b",
+        "sae_id":       "model.layers.19",
+    },
+
+    "deepseek-r1": {
+        "display_name": "Deepseek R1(Layer 16)",
+        "sae_release":  "Farmerobot/deepseek-r1-1.5b-sae-l16-topk32-v2",
+        "sae_id":       "deepseek_base_l16_topk32_0M",
+    },
+
+    # —— Qwen 3.5 0.8B ————————————————————————————————
+    "qwen-3.5-0.8b": {
+        "display_name": "Qwen 3.5 0.8B",
+        "sae_release":  "decoderesearch/qwen-3.5-saes",
+        "sae_id":       "blocks.12.hook_resid_post",
+    },
+
+    # —— Qwen 3.5 4B base ————————————————————————————————
+
+    # ——— Qwen 3.5 4B ————————————————————————————————
 
     # ── Add new models below ──────────────────────────────────────────────────
     # Template:
