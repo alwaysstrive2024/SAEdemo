@@ -277,7 +277,7 @@ function ModelSelectorRow({ rowId, index, modelKey, availableModels, chosenKeys,
               disabled={chosenKeys.includes(m.key) && m.key !== modelKey}
               style={{ background: '#12141a', color: 'white' }}
             >
-              {m.display_name} — Layer {m.layer}
+              {m.display_name}
             </option>
           ))}
         </select>

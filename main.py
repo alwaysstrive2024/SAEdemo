@@ -102,6 +102,7 @@ MODEL_REGISTRY: Dict[str, Dict[str, str]] = {
         "sae_release":  "llama_3.2_1b-res-jb",
         "sae_id":       "blocks.8.hook_resid_post",
     },
+    
     # ── Gemma-4 SAEs (decoderesearch) ─────────────────────────────────────────
     "gemma-4-e2b-l6": {
         "display_name": "Gemma-4-E2B (Layer 6)",
@@ -114,7 +115,7 @@ MODEL_REGISTRY: Dict[str, Dict[str, str]] = {
         "sae_id":       "gemma-4-e2b/btk-mat-layer-17-k-100",
     },
     "gemma-4-e2b-l28": {
-        "display_name": "Gemma-4-E2B (Layer 28)",
+        "display_name": "Gemma-4-E2B(layer 28)",
         "sae_release":  "decoderesearch/gemma-4-saes",
         "sae_id":       "gemma-4-e2b/btk-mat-layer-28-k-100",
     },

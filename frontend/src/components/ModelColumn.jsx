@@ -1,6 +1,6 @@
 import { Download, Layers, GitBranch, Activity } from 'lucide-react';
 import ConceptCluster from './ConceptCluster';
-import FeatureBars from './TokenBars';
+import FeatureBars from './FeatureBars';
 import TextAttribution from './TextAttribution';
 import { downloadJSON } from '../utils/download';
 
