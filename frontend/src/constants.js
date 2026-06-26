@@ -1,9 +1,75 @@
 // ─── API ────────────────────────────────────────────────────────────────────
 export const API_BASE = 'http://localhost:8000';
 
-// ─── Per-model colour tokens ─────────────────────────────────────────────────
-export const MODEL_COLORS = {
-  'pythia-70m': {
+// Mirrors backend/registry.py so the selector can still show every registered
+// model while the backend is starting or temporarily unavailable.
+export const FALLBACK_MODELS = [
+  {
+    key: 'pythia-70m',
+    display_name: 'Pythia 70M',
+    sae_release: 'pythia-70m-deduped',
+    sae_id: 'res-jb',
+  },
+  {
+    key: 'gemma-2b',
+    display_name: 'Gemma 2B',
+    sae_release: 'gemma-2b-res-jb',
+    sae_id: 'blocks.12.hook_resid_post',
+  },
+  {
+    key: 'llama-3.2-1b',
+    display_name: 'Llama 3.2 1B',
+    sae_release: 'llama_3.2_1b-res-jb',
+    sae_id: 'blocks.8.hook_resid_post',
+  },
+  {
+    key: 'gemma-4-e2b-l6',
+    display_name: 'Gemma-4-E2B (Layer 6)',
+    sae_release: 'decoderesearch/gemma-4-saes',
+    sae_id: 'gemma-4-e2b/btk-mat-layer-6-k-100',
+  },
+  {
+    key: 'gemma-4-e2b-l17',
+    display_name: 'Gemma-4-E2B (Layer 17)',
+    sae_release: 'decoderesearch/gemma-4-saes',
+    sae_id: 'gemma-4-e2b/btk-mat-layer-17-k-100',
+  },
+  {
+    key: 'gemma-4-e2b-l28',
+    display_name: 'Gemma-4-E2B (Layer 28)',
+    sae_release: 'decoderesearch/gemma-4-saes',
+    sae_id: 'gemma-4-e2b/btk-mat-layer-28-k-100',
+  },
+  {
+    key: 'gemma-4-e4b-l7',
+    display_name: 'Gemma-4-E4B (Layer 7)',
+    sae_release: 'decoderesearch/gemma-4-saes',
+    sae_id: 'gemma-4-e4b/btk-mat-layer-7-k-100',
+  },
+  {
+    key: 'gemma-4-e4b-l21',
+    display_name: 'Gemma-4-E4B (Layer 21)',
+    sae_release: 'decoderesearch/gemma-4-saes',
+    sae_id: 'gemma-4-e4b/btk-mat-layer-21-k-100',
+  },
+  {
+    key: 'gemma-4-e4b-l35',
+    display_name: 'Gemma-4-E4B (Layer 35)',
+    sae_release: 'decoderesearch/gemma-4-saes',
+    sae_id: 'gemma-4-e4b/btk-mat-layer-35-k-100',
+  },
+  {
+    key: 'gemma-4-31b-l30',
+    display_name: 'Gemma-4-31B (Layer 30)',
+    sae_release: 'decoderesearch/gemma-4-saes',
+    sae_id: 'gemma-4-31b/btk-mat-layer-30-k-100',
+  },
+];
+
+// ─── Per-model colour tokens (Slot-based) ────────────────────────────────────
+export const SLOT_COLORS = [
+  {
+    // Slot 0: Purple / Indigo
     accent: '#a855f7',
     accentDark: '#7c3aed',
     gradient: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
@@ -16,7 +82,8 @@ export const MODEL_COLORS = {
     border: 'rgba(168, 85, 247, 0.4)',
     tag: 'TL+SAE',
   },
-  'gemma-2b': {
+  {
+    // Slot 1: Cyan / Emerald
     accent: '#06b6d4',
     accentDark: '#0284c7',
     gradient: 'linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)',
@@ -29,7 +96,8 @@ export const MODEL_COLORS = {
     border: 'rgba(6, 182, 212, 0.4)',
     tag: 'TL+SAE',
   },
-  'llama-3.2-1b': {
+  {
+    // Slot 2: Emerald / Green
     accent: '#10b981',
     accentDark: '#059669',
     gradient: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
@@ -42,7 +110,7 @@ export const MODEL_COLORS = {
     border: 'rgba(16, 185, 129, 0.4)',
     tag: 'TL+SAE',
   },
-};
+];
 
 export const DEFAULT_COLOR = {
   accent: '#6366f1',
@@ -58,8 +126,9 @@ export const DEFAULT_COLOR = {
   tag: 'TL+SAE',
 };
 
-export function getModelColor(modelKey) {
-  return MODEL_COLORS[modelKey] ?? DEFAULT_COLOR;
+export function getModelColor(slotIndex) {
+  if (typeof slotIndex !== 'number' || slotIndex < 0) return DEFAULT_COLOR;
+  return SLOT_COLORS[slotIndex % SLOT_COLORS.length];
 }
 
 // ─── Loading overlay pipeline steps ──────────────────────────────────────────

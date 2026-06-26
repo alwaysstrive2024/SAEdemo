@@ -94,7 +94,7 @@ export default function DivergenceSummary({ results }) {
       >
         {/* ── Per-model unique columns ── */}
         {modelKeys.map((key, i) => {
-          const color = getModelColor(key);
+          const color = getModelColor(i);
           const modelName = results.models_data[key]?.model_metadata?.model_name ?? key;
           const items = uniquePerModel[i];
 

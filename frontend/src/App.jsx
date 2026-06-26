@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Brain, Cpu, Zap, AlertCircle, RefreshCw } from 'lucide-react';
 
-import { API_BASE, getModelColor } from './constants';
+import { API_BASE, FALLBACK_MODELS, getModelColor } from './constants';
 import ControlPanel from './components/ControlPanel';
 import ModelColumn from './components/ModelColumn';
 import DivergenceSummary from './components/DivergenceSummary';
@@ -9,7 +9,7 @@ import LoadingOverlay from './components/LoadingOverlay';
 
 export default function App() {
   // ── State ────────────────────────────────────────────────────────────────
-  const [availableModels, setAvailableModels] = useState([]);
+  const [availableModels, setAvailableModels] = useState(FALLBACK_MODELS);
   const [selectedModels, setSelectedModels] = useState([]); // [{id, modelKey}]
   const [prompt, setPrompt] = useState('Apple announced the iPhone 18 at WWDC.');
   const [topK, setTopK] = useState(10);
@@ -22,15 +22,8 @@ export default function App() {
   useEffect(() => {
     fetch(`${API_BASE}/models`)
       .then((r) => r.json())
-      .then((data) => setAvailableModels(data.models ?? []))
-      .catch(() => {
-        // Graceful fallback — lets the UI load even if backend isn't running yet
-        setAvailableModels([
-          { key: 'pythia-70m',   display_name: 'Pythia 70M',   layer: 4,  hook_point: 'blocks.4.hook_resid_post',  sae_release: 'pythia-70m-deduped' },
-          { key: 'gemma-2b',     display_name: 'Gemma 2B',     layer: 12, hook_point: 'blocks.12.hook_resid_post', sae_release: 'gemma-2b-res-jb' },
-          { key: 'llama-3.2-1b', display_name: 'Llama 3.2 1B', layer: 8,  hook_point: 'blocks.8.hook_resid_post',  sae_release: 'llama_3.2_1b-res-jb' },
-        ]);
-      });
+      .then((data) => setAvailableModels(data.models?.length ? data.models : FALLBACK_MODELS))
+      .catch(() => setAvailableModels(FALLBACK_MODELS));
 
     // Also ping root for pipeline mode
     fetch(`${API_BASE}/`, { credentials: 'include' })
@@ -195,13 +188,13 @@ export default function App() {
                 gridTemplateColumns: `repeat(${activeModelKeys.length}, minmax(0, 1fr))`,
               }}
             >
-              {activeModelKeys.map((key) => (
+              {activeModelKeys.map((key, index) => (
                 <ModelColumn
                   key={key}
                   modelKey={key}
                   data={results.models_data?.[key]}
                   topK={topK}
-                  modelColor={getModelColor(key)}
+                  modelColor={getModelColor(index)}
                 />
               ))}
             </div>
