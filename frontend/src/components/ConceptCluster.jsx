@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 /**
  * ConceptCluster
@@ -52,12 +53,20 @@ export default function ConceptCluster({ modelData, modelColor }) {
 
   return (
     <div className="relative">
-      <svg
-        viewBox={`0 0 ${W} ${H}`}
-        className="w-full"
-        style={{ overflow: 'visible' }}
+      <TransformWrapper
+        initialScale={1}
+        minScale={0.5}
+        maxScale={4}
+        centerOnInit
+        wheel={{ step: 0.1 }}
       >
-        <defs>
+        <TransformComponent wrapperStyle={{ width: '100%', height: '100%', overflow: 'hidden', cursor: 'grab', borderRadius: '12px' }}>
+          <svg
+            viewBox={`0 0 ${W} ${H}`}
+            className="w-full"
+            style={{ overflow: 'visible' }}
+          >
+            <defs>
           {/* Radial glow gradient for center node */}
           <radialGradient id={`cg-${modelColor.accent.replace('#', '')}`} cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor={modelColor.accent} stopOpacity="0.4" />
@@ -251,17 +260,22 @@ export default function ConceptCluster({ modelData, modelColor }) {
           {shortPrompt}
         </text>
       </svg>
+        </TransformComponent>
+      </TransformWrapper>
 
       {/* Legend */}
-      <div className="mt-1 flex items-center justify-center gap-3 text-[10px] text-white/30">
-        <span className="flex items-center gap-1">
-          <span className="w-2 h-2 rounded-full" style={{ background: modelColor.accent, opacity: 0.4 }} />
-          Low activation
-        </span>
-        <span className="flex items-center gap-1">
-          <span className="w-3 h-3 rounded-full" style={{ background: modelColor.accent, opacity: 0.85 }} />
-          High activation
-        </span>
+      <div className="mt-1 flex flex-col items-center justify-center gap-1 text-[10px] text-white/30">
+        <div className="flex items-center gap-3">
+          <span className="flex items-center gap-1">
+            <span className="w-2 h-2 rounded-full" style={{ background: modelColor.accent, opacity: 0.4 }} />
+            Low activation
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-3 h-3 rounded-full" style={{ background: modelColor.accent, opacity: 0.85 }} />
+            High activation
+          </span>
+        </div>
+        <span className="text-white/20 italic">Scroll to zoom, drag to pan</span>
       </div>
     </div>
   );
