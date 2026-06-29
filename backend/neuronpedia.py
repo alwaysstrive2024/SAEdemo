@@ -1,8 +1,11 @@
 import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Dict
+from dotenv import load_dotenv
+import os
 
-NEURONPEDIA_API_KEY = ""
+load_dotenv()  # Load environment variables from .env file
+NEURONPEDIA_API_KEY = os.getenv("X-API-KEY")
 NEURONPEDIA_BASE_URL = "https://www.neuronpedia.org/api/feature"
 
 # Cache to avoid redundant API calls
