@@ -1,0 +1,19 @@
+# 忽略前端依赖和打包产物（刺客大头）
+node_modules/
+dist/
+.next/
+
+# 忽略 Python 缓存和本地虚拟环境
+**/__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# 忽略大模型本地缓存与各种大文件
+.cache/
+cache/
+*.pt
+*.pth
+*.bin
+.git
