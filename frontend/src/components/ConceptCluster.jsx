@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import { RotateCcw } from 'lucide-react';
 
 /**
  * ConceptCluster
@@ -60,12 +61,23 @@ export default function ConceptCluster({ modelData, modelColor }) {
         centerOnInit
         wheel={{ step: 0.1 }}
       >
-        <TransformComponent wrapperStyle={{ width: '100%', height: '100%', overflow: 'hidden', cursor: 'grab', borderRadius: '12px' }}>
-          <svg
-            viewBox={`0 0 ${W} ${H}`}
-            className="w-full"
-            style={{ overflow: 'visible' }}
-          >
+        {({ resetTransform }) => (
+          <>
+            <button
+              onClick={() => resetTransform()}
+              className="absolute top-2 right-2 z-10 p-1.5 rounded-lg bg-white/5 hover:bg-white/10 
+                         border border-white/10 text-white/50 hover:text-white/80 transition-colors
+                         backdrop-blur-sm shadow-sm flex items-center justify-center"
+              title="Reset Zoom"
+            >
+              <RotateCcw size={14} />
+            </button>
+            <TransformComponent wrapperStyle={{ width: '100%', height: '100%', overflow: 'hidden', cursor: 'grab', borderRadius: '12px' }}>
+              <svg
+                viewBox={`0 0 ${W} ${H}`}
+                className="w-full"
+                style={{ overflow: 'visible' }}
+              >
             <defs>
           {/* Radial glow gradient for center node */}
           <radialGradient id={`cg-${modelColor.accent.replace('#', '')}`} cx="50%" cy="50%" r="50%">
@@ -257,10 +269,12 @@ export default function ConceptCluster({ modelData, modelColor }) {
           fontSize={6.5}
           fontFamily="'Outfit', sans-serif"
         >
-          {shortPrompt}
-        </text>
-      </svg>
-        </TransformComponent>
+              {shortPrompt}
+            </text>
+          </svg>
+            </TransformComponent>
+          </>
+        )}
       </TransformWrapper>
 
       {/* Legend */}

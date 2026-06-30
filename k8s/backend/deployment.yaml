@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sae-backend
+  namespace: gufy
+  labels:
+    app: sae-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sae-backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: sae-backend
+    spec:
+      imagePullSecrets:
+        - name: harbor-cred
+      containers:
+        - name: backend
+          image: harbor.aixiongan.org.cn:9443/gufy/sae-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http
+          resources:
+            requests:
+              nvidia.com/gpu: 1
+              memory: "64Gi"
+              cpu: "8"
+            limits:
+              nvidia.com/gpu: 1
+              memory: "96Gi"
+              cpu: "16"
+          env:
+            - name: CUDA_VISIBLE_DEVICES
+              value: "0"
+          # 取消注释可挂载 HuggingFace 模型缓存卷，避免每次重启都重新下载模型
+          # volumeMounts:
+          #   - name: hf-cache
+          #     mountPath: /app/cache/huggingface
+      # volumes:
+      #   - name: hf-cache
+      #     persistentVolumeClaim:
+      #       claimName: hf-cache-pvc

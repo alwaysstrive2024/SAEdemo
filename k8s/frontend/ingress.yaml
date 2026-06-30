@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sae-frontend-ingress
+  namespace: gufy
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    # 强制 HTTPS 重定向（如果你的 Ingress Controller 支持 cert-manager，可以打开这行）
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+spec:
+  rules:
+    - host: gufy.aixiongan.org.cn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sae-frontend-svc
+                port:
+                  number: 80
+  # 如果你有 TLS 证书，取消注释以下内容（替换 secret 名称）：
+  # tls:
+  #   - hosts:
+  #       - gufy.aixiongan.org.cn
+  #     secretName: gufy-tls-secret

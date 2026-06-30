@@ -1,5 +1,8 @@
 // ─── API ────────────────────────────────────────────────────────────────────
-export const API_BASE = 'http://localhost:8000';
+// Local dev    → http://localhost:8000  (direct to FastAPI)
+// K8s / prod   → /api  (nginx in the frontend pod reverse-proxies /api/* to
+//                       the internal sae-backend-svc K8s service)
+export const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
 
 // Mirrors backend/registry.py so the selector can still show every registered
 // model while the backend is starting or temporarily unavailable.
