@@ -9,7 +9,7 @@ spec:
   type: ClusterIP  # 只需要 Ingress 访问，不需要对外暴露 NodePort
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 3000
       protocol: TCP
       name: http
   selector:
