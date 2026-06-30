@@ -21,3 +21,6 @@ numpy>=1.26.0
 huggingface-hub>=0.23.0
 requests
 accelerate>=0.28.0
+
+transformer-lens
+sae-lens

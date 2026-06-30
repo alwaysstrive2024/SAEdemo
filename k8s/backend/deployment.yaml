@@ -24,18 +24,18 @@ spec:
         - name: harbor-cred
       containers:
         - name: backend
-          image: harbor.aixiongan.org.cn:9443/gufy/sae-backend:latest
+          image: harbor.aixiongan.org.cn:9443/saedemo/sae-backend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
               name: http
           resources:
             requests:
-              nvidia.com/gpu: 1
+              nvidia.com/gpu: 2
               memory: "64Gi"
               cpu: "8"
             limits:
-              nvidia.com/gpu: 1
+              nvidia.com/gpu: 2
               memory: "96Gi"
               cpu: "16"
           env:

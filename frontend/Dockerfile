@@ -8,8 +8,9 @@ WORKDIR /app
 
 # Install dependencies first (better Docker layer caching)
 COPY package*.json ./
-RUN npm ci
-
+RUN npm config set registry https://registry.npmmirror.com && \
+    npm install
+    
 # Copy the rest of the source
 COPY . .
 

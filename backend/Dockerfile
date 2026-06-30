@@ -1,32 +1,19 @@
-# Base Image: PyTorch with CUDA 12.1 + cuDNN 8
-FROM pytorch/pytorch:2.2.0-cuda12.1-cudnn8-runtime
+# ═══════════════════════════════════════════════════════════════════════════════
+# Dockerfile — 业务代码层（仅 KB 级别）
+# ───────────────────────────────────────────────────────────────────────────────
+# 继承自 Dockerfile.base，不重复安装任何依赖。
+# 每次修改业务代码只需重建并推送此层（< 1MB，秒级完成）。
+# ═══════════════════════════════════════════════════════════════════════════════
 
-# Set environment variables to optimize PyTorch/CUDA execution
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    CUDA_DEVICE_ORDER=PCI_BUS_ID \
-    # Optional: HuggingFace hub cache directory
-    HF_HOME=/app/cache/huggingface
+FROM harbor.aixiongan.org.cn:9443/saedemo/sae-backend-base:latest
 
 WORKDIR /app
 
-# Install system dependencies (if any are needed)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements and install them
-COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
-
-# Copy backend application code
+# ── 只做一件事：拷贝最新业务代码 ─────────────────────────────────────────────
+# 所有 Python 依赖已在 base 镜像中预装好，此层体积 < 1MB
 COPY . .
 
-# Expose the FastAPI port
+# ── 服务暴露与启动 ────────────────────────────────────────────────────────────
 EXPOSE 8000
 
-# Run the FastAPI server using Uvicorn
-# Note: For production, we bind to 0.0.0.0 so K8s can route traffic to it.
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
