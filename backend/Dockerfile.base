@@ -31,7 +31,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt /tmp/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r /tmp/requirements.txt
+    pip install --no-cache-dir --default-timeout=100 --retries=5 \
+    -r /tmp/requirements.txt
 
 # ── 说明 ─────────────────────────────────────────────────────────────────────
 # 此镜像不包含任何业务代码。
