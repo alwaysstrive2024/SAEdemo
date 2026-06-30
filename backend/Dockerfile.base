@@ -32,7 +32,9 @@ COPY requirements.txt /tmp/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir --default-timeout=100 --retries=5 \
-    -r /tmp/requirements.txt
+    -r /tmp/requirements.txt && \
+    pip uninstall -y torchvision torchaudio && \
+    pip install --upgrade --no-cache-dir transformers
 
 # ── 说明 ─────────────────────────────────────────────────────────────────────
 # 此镜像不包含任何业务代码。
