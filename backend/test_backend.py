@@ -26,7 +26,7 @@ import os
 import sys
 import traceback
 from typing import Any, Dict, List, Tuple
-
+os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 # ══════════════════════════════════════════════════════════════════════════════
 # ① 配置：选择要测试的模型和测试 prompt
 # ══════════════════════════════════════════════════════════════════════════════
