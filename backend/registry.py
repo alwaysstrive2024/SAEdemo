@@ -74,7 +74,7 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "hook_point":    "blocks.4.hook_resid_pre",
         "hook_layer":    4,
     },
-    
+
     "gpt2-small-l8": {
         "display_name":  "GPT-2 Small (Layer 8)",
         "sae_release":   "gpt2-small-res-jb",
@@ -93,13 +93,12 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
     },
 
     # ── Google Gemma-4 E2B (decoderesearch SAEs) ──────────────────────────────
-    # 基座模型: google/gemma-4-2b（Gemma 4 第二代，2B 参数）
-    # ⚠️  如果下载时报 404，请改为 google/gemma-4-2b-it（instruction-tuned 版本）
+    # 基座模型: google/gemma-4-E2B（Gemma 4 第二代，2B 参数）
     "gemma-4-e2b-l6": {
         "display_name":  "Gemma-4 E2B (Layer 6)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-e2b/btk-mat-layer-6-k-100",
-        "hf_model_name": "google/gemma-4-2b",
+        "hf_model_name": "google/gemma-4-E2B",
         "hook_point":    "blocks.6.hook_resid_post",
         "hook_layer":    6,
     },
@@ -107,7 +106,7 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "display_name":  "Gemma-4 E2B (Layer 17)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-e2b/btk-mat-layer-17-k-100",
-        "hf_model_name": "google/gemma-4-2b",
+        "hf_model_name": "google/gemma-4-E2B",
         "hook_point":    "blocks.17.hook_resid_post",
         "hook_layer":    17,
     },
@@ -115,7 +114,7 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "display_name":  "Gemma-4 E2B (Layer 28)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-e2b/btk-mat-layer-28-k-100",
-        "hf_model_name": "google/gemma-4-2b",
+        "hf_model_name": "google/gemma-4-E2B",
         "hook_point":    "blocks.28.hook_resid_post",
         "hook_layer":    28,
     },
@@ -127,7 +126,7 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "display_name":  "Gemma-4 E4B (Layer 7)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-e4b/btk-mat-layer-7-k-100",
-        "hf_model_name": "google/gemma-4-4b",
+        "hf_model_name": "google/gemma-4-E4B",
         "hook_point":    "blocks.7.hook_resid_post",
         "hook_layer":    7,
     },
@@ -135,7 +134,7 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "display_name":  "Gemma-4 E4B (Layer 21)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-e4b/btk-mat-layer-21-k-100",
-        "hf_model_name": "google/gemma-4-4b",
+        "hf_model_name": "google/gemma-4-E4B",
         "hook_point":    "blocks.21.hook_resid_post",
         "hook_layer":    21,
     },
@@ -143,7 +142,7 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "display_name":  "Gemma-4 E4B (Layer 35)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-e4b/btk-mat-layer-35-k-100",
-        "hf_model_name": "google/gemma-4-4b",
+        "hf_model_name": "google/gemma-4-E4B",
         "hook_point":    "blocks.35.hook_resid_post",
         "hook_layer":    35,
     },
@@ -155,7 +154,7 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "display_name":  "Gemma-4 31B (Layer 30)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-31b/btk-mat-layer-30-k-100",
-        "hf_model_name": "google/gemma-4-27b",
+        "hf_model_name": "google/gemma-4-31B",
         "hook_point":    "blocks.30.hook_resid_post",
         "hook_layer":    30,
     },
