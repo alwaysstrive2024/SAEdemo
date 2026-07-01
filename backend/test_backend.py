@@ -21,12 +21,15 @@ test_backend.py — 后端全链路诊断脚本
 
 from __future__ import annotations
 
-import importlib
+from __future__ import annotations
 import os
+import transformer_lens
+os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+import importlib
 import sys
 import traceback
 from typing import Any, Dict, List, Tuple
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+import sae_lens
 # ══════════════════════════════════════════════════════════════════════════════
 # ① 配置：选择要测试的模型和测试 prompt
 # ══════════════════════════════════════════════════════════════════════════════
