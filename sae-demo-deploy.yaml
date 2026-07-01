@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sae-demo
+  namespace: gufy
+  labels:
+    app: sae-demo
+spec:
+  nodeSelector:
+    gpu-model: PRO6000  # 锁定带有 96G 显存怪兽卡的节点
+  containers:
+  - name: sae-container
+    image: harbor.aixiongan.org.cn:9443/saedemo/sae-backend:latest
+    imagePullPolicy: IfNotPresent
+    command: 
+    - bash
+    - -c
+    - |
+      echo "=== [K8s 启动初始化] 开始清洗环境... ==="
+      pip uninstall -y torchvision torchaudio
+      echo "=== [K8s 启动初始化] 正在安装/检查特定环境... ==="
+      # 如果你后续有其他特定的安装命令，也可以追加在这里，例如：
+      # pip install some-package -i https://pypi.tuna.tsinghua.edu.cn/simple
+      echo "=== [K8s 启动初始化] 环境清洗完毕！进入常驻守护模式... ==="
+      while true; do sleep 30; done;
+    resources:
+      limits:
+        cpu: "64"          # 64核 CPU（总配额的一半）
+        memory: 256Gi       # 霸占 256G 物理内存（总配额的一半，彻底告别 OOM）
+        nvidia.com/gpu: "2" # 霸占 2 张顶级卡（共 192GB 宇宙级显存！）
+      requests:
+        cpu: "64"
+        memory: 256Gi
+        nvidia.com/gpu: "2"
+    ports:
+    - containerPort: 80    # 前端内部端口
+      name: frontend
+    - containerPort: 8000  # 后端内部端口
+      name: backend

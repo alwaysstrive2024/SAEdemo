@@ -11,7 +11,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 80         # 前端 nginx proxy_pass 连接的端口
-      targetPort: 8000 # FastAPI 监听的容器端口
+      targetPort: 8001 # FastAPI 监听的容器端口
       protocol: TCP
       name: http
   selector:

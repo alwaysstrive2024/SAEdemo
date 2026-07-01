@@ -16,4 +16,5 @@ COPY . .
 # ── 服务暴露与启动 ────────────────────────────────────────────────────────────
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# --reload: 监听文件变化，kubectl cp 更新代码后自动重载，无需重启 Pod
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

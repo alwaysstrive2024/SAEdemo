@@ -41,6 +41,8 @@ spec:
           env:
             - name: CUDA_VISIBLE_DEVICES
               value: "0"
+            - name: HF_ENDPOINT
+              value: "https://hf-mirror.com"
           # 取消注释可挂载 HuggingFace 模型缓存卷，避免每次重启都重新下载模型
           # volumeMounts:
           #   - name: hf-cache

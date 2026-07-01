@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 config.py — Global constants and shared utility functions
 =========================================================
@@ -5,7 +6,12 @@ Import this module in pipeline.py and main.py.
 Do NOT put model registry data here; that lives in registry.py.
 """
 
-from __future__ import annotations
+
+# ── 镜像源设置（必须在所有 HuggingFace 库导入之前）────────────────────────────
+# 强制覆盖，无视 K8s/Docker 环境变量，确保永远走 hf-mirror.com
+# import os
+# os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+# ─────────────────────────────────────────────────────────────────────────────
 
 import gc
 import re

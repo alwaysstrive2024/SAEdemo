@@ -101,6 +101,17 @@ def _resolve_model_config(model_key: str) -> Dict[str, Any]:
     hf_model_name = safe_sae_attr(sae_cfg, "model_name", "model_id",   default=model_key)
     sae_id_read   = safe_sae_attr(sae_cfg, "sae_id",                    default=reg["sae_id"])
 
+    # ── Registry overrides take priority over sae.cfg ───────────────────────
+    # sae.cfg often returns wrong/empty values (e.g. 'gemma-2b' instead of
+    # 'google/gemma-2b', or hook_name='').  Explicit registry entries win.
+    if reg.get("hf_model_name"):
+        hf_model_name = reg["hf_model_name"]
+    if reg.get("hook_point"):
+        hook_point = reg["hook_point"]
+    if reg.get("hook_layer") is not None:
+        hook_layer = reg["hook_layer"]
+    # ────────────────────────────────────────────────────────────────────────
+
     if hook_layer is None:
         hook_layer = layer_from_hook(hook_point) or 0
 

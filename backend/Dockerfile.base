@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     CUDA_DEVICE_ORDER=PCI_BUS_ID \
     HF_HOME=/app/cache/huggingface \
-    # pip 使用国内镜像加速（构建服务器在国内）
+    HF_ENDPOINT=https://hf-mirror.com \
     PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple \
     PIP_TRUSTED_HOST=pypi.tuna.tsinghua.edu.cn
 
