@@ -207,6 +207,7 @@ def _find_hf_layer(model: Any, layer_idx: int) -> Any:
       OPT                              →  model.model.decoder.layers[n]
     """
     candidates = [
+        lambda m, n: m.model.language_model.layers[n],
         lambda m, n: m.language_model.layers[n],
         lambda m, n: m.model.layers[n],
         lambda m, n: m.gpt_neox.layers[n],
