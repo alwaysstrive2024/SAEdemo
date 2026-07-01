@@ -34,7 +34,7 @@ from typing import Any, Dict, List, Tuple
 # 要测试的模型 key（必须和 registry.py 中的 key 完全一致）
 MODELS_TO_TEST: List[str] = [
     "gemma-2b",
-    "pythia-70m",
+    "pythia",
     "gpt2-small-l4",
     "llama-3.2-1b",
     "gemma-4-e2b-l6",

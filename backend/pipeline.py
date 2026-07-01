@@ -2,7 +2,7 @@
 pipeline.py — Analysis Engine
 ==============================
 Handles all computation:
-  • _resolve_model_config()  — lazy config extraction from sae.cfg (cached)
+  • _resolve_model_config()   — lazy config extraction from sae.cfg (cached)
   • _extract_activations_tl()  — Path A: TransformerLens HookedTransformer
   • _extract_activations_hf()  — Path B: HuggingFace + register_forward_hook
   • _build_reports()           — Report 1 (global) + Report 2 (per-token)
@@ -45,6 +45,15 @@ def set_deps(tl: bool, sae: bool, hf: bool, torch_ok: bool) -> None:
     HF_AVAILABLE    = hf
     TORCH_AVAILABLE = torch_ok
     FULL_PIPELINE   = torch_ok and sae and (tl or hf)
+
+
+def _normalise_prompt_text(prompt: Any) -> str:
+    """Coerce single-item batch inputs into the plain text expected downstream."""
+    if isinstance(prompt, (list, tuple)):
+        if not prompt:
+            raise ValueError("Prompt batch must contain at least one item.")
+        prompt = prompt[0]
+    return str(prompt)
 
 
 # Config cache  (model_key → resolved config dict)
@@ -102,8 +111,6 @@ def _resolve_model_config(model_key: str) -> Dict[str, Any]:
     sae_id_read   = safe_sae_attr(sae_cfg, "sae_id",                    default=reg["sae_id"])
 
     # ── Registry overrides take priority over sae.cfg ───────────────────────
-    # sae.cfg often returns wrong/empty values (e.g. 'gemma-2b' instead of
-    # 'google/gemma-2b', or hook_name='').  Explicit registry entries win.
     if reg.get("hf_model_name"):
         hf_model_name = reg["hf_model_name"]
     if reg.get("hook_point"):
@@ -155,7 +162,9 @@ def _extract_activations_tl(
     import torch
     from transformer_lens import HookedTransformer
 
+    prompt_text = _normalise_prompt_text(prompt)
     print(f"[PATH-A | TL] 🔬 [TransformerLens] Loading '{hf_model_name}' …")
+    
     model = HookedTransformer.from_pretrained(
         hf_model_name,
         center_writing_weights=False,
@@ -165,8 +174,9 @@ def _extract_activations_tl(
     model.eval()
     print(f"[PATH-A | TL] ✅ d_model={model.cfg.d_model}, n_layers={model.cfg.n_layers}")
 
-    tokens_tensor = model.to_tokens(prompt)
-    token_strs: List[str] = model.to_str_tokens(prompt)
+    tokens_tensor = model.to_tokens(prompt_text)
+    # 修复 Gemma 等模型传入纯字符串时的类型转换 Bug，改用生成的 tokens_tensor 引导转换
+    token_strs: List[str] = model.to_str_tokens(tokens_tensor[0])
     print(f"[PATH-A | TL] 🔢 {len(token_strs)} tokens: {token_strs}")
 
     captured: Dict[str, Any] = {}
@@ -197,6 +207,7 @@ def _find_hf_layer(model: Any, layer_idx: int) -> Any:
       OPT                              →  model.model.decoder.layers[n]
     """
     candidates = [
+        lambda m, n: m.language_model.layers[n],
         lambda m, n: m.model.layers[n],
         lambda m, n: m.gpt_neox.layers[n],
         lambda m, n: m.transformer.h[n],
@@ -230,6 +241,7 @@ def _extract_activations_hf(
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
+    prompt_text = _normalise_prompt_text(prompt)
     print(f"[PATH-B | HF] 🤗 Loading '{hf_model_name}' via AutoModelForCausalLM …")
     tokenizer = AutoTokenizer.from_pretrained(hf_model_name)
     model = AutoModelForCausalLM.from_pretrained(
@@ -239,7 +251,7 @@ def _extract_activations_hf(
     )
     model.eval()
 
-    inputs = tokenizer(prompt, return_tensors="pt")
+    inputs = tokenizer(prompt_text, return_tensors="pt")
     inputs = {k: v.to(device) for k, v in inputs.items()}
     token_strs = tokenizer.convert_ids_to_tokens(inputs["input_ids"][0].tolist())
     print(f"[PATH-B | HF] 🔢 {len(token_strs)} tokens: {token_strs}")
@@ -337,6 +349,7 @@ def _mock_analyse_model(
     prompt: str, model_key: str, top_k: int
 ) -> Dict[str, Any]:
     """Deterministic seeded-random mock — full JSON schema, no ML deps."""
+    prompt = _normalise_prompt_text(prompt)
     seed = hash(prompt + model_key) & 0xFFFFFFFF
     rng  = random.Random(seed)
 
@@ -446,6 +459,7 @@ def _real_analyse_model(
     """
     import torch
 
+    prompt = _normalise_prompt_text(prompt)
     cfg    = _resolve_model_config(model_key)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     rng    = random.Random(hash(prompt + model_key) & 0xFFFFFFFF)
@@ -467,7 +481,9 @@ def _real_analyse_model(
             )
             activation_path = "transformer_lens"
         except Exception as exc:
-            print(f"[REAL | {model_key}] ⚠️  Path A failed: {exc}")
+            # 拓宽异常捕获范围，捕获所有导致 Path A 失败的错误（包括 TypeError/ValueError），实现安全熔断
+            print(f"[REAL | {model_key}] ⚠️  Path A 无法加载或转换，安全切换至 Path B。错误原因: {exc}")
+            resid = None
 
     if resid is None:
         if not HF_AVAILABLE:
@@ -487,25 +503,31 @@ def _real_analyse_model(
 
     print(f"[REAL | {model_key}] 🔭 [SAELens] Loading SAE "
           f"release='{cfg['sae_release']}' sae_id='{cfg['sae_id']}' …")
-    sae, _, _ = _SAE.from_pretrained(
-        release=cfg["sae_release"],
-        sae_id=cfg["sae_id"],
-        device=device,
-    )
-    sae.eval()
-    d_sae = safe_sae_attr(sae.cfg, "d_sae", default=resid.shape[-1] * 8)
-    print(f"[REAL | {model_key}] ✅ [SAELens] d_sae={d_sae}")
+    
+    # 增加显存保护机制，确保异常发生时也一定会释放 SAE 显存
+    try:
+        sae, _, _ = _SAE.from_pretrained(
+            release=cfg["sae_release"],
+            sae_id=cfg["sae_id"],
+            device=device,
+        )
+        sae.eval()
+        d_sae = safe_sae_attr(sae.cfg, "d_sae", default=resid.shape[-1] * 8)
+        print(f"[REAL | {model_key}] ✅ [SAELens] d_sae={d_sae}")
 
-    with torch.no_grad():
-        feature_acts = sae.encode(resid)  # (seq, d_sae)
+        with torch.no_grad():
+            feature_acts = sae.encode(resid)  # (seq, d_sae)
 
-    l0 = (feature_acts > 0).float().sum(dim=-1).mean().item()
-    print(f"[REAL | {model_key}] 📊 {tuple(feature_acts.shape)}, mean L0={l0:.1f}")
-
-    print(f"[REAL | {model_key}] 🗑️  [HOT-SWAP] Freeing SAE …")
-    feature_acts_cpu = feature_acts.cpu()
-    del sae, feature_acts
-    vram_clear()
+        l0 = (feature_acts > 0).float().sum(dim=-1).mean().item()
+        print(f"[REAL | {model_key}] 📊 {tuple(feature_acts.shape)}, mean L0={l0:.1f}")
+        feature_acts_cpu = feature_acts.cpu()
+    finally:
+        print(f"[REAL | {model_key}] 🗑️  [HOT-SWAP] Freeing SAE …")
+        if 'sae' in locals():
+            del sae
+        if 'feature_acts' in locals():
+            del feature_acts
+        vram_clear()
 
     # ── Build reports ─────────────────────────────────────────────────────────
     fired_features_summary, token_level_firings = _build_reports(

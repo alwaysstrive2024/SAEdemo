@@ -10,7 +10,7 @@ export const FALLBACK_MODELS = [
   {
     key: 'pythia-70m',
     display_name: 'Pythia 70M',
-    sae_release: 'pythia-70m-deduped',
+    sae_release: 'pythia-70m-deduped-res-jb',
     sae_id: 'res-jb',
   },
   {
@@ -22,7 +22,7 @@ export const FALLBACK_MODELS = [
   {
     key: 'llama-3.2-1b',
     display_name: 'Llama 3.2 1B',
-    sae_release: 'llama_3.2_1b-res-jb',
+    sae_release: 'llama-3.2-1b-res-jb',
     sae_id: 'blocks.8.hook_resid_post',
   },
   {

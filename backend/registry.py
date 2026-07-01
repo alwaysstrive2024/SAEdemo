@@ -32,11 +32,11 @@ ModelEntry = Dict[str, str]
 
 MODEL_REGISTRY: Dict[str, ModelEntry] = {
 
-    # ── EleutherAI Pythia 70M ─────────────────────────────────────────────────
-    "pythia-70m": {
-        "display_name":  "Pythia 70M",
-        "sae_release":   "pythia-70m-deduped",
-        "sae_id":        "res-jb",
+    # ──EleutherAI Pythia─────────────────────────────────────────────────
+    "pythia": {
+        "display_name":  "Pythia",
+        "sae_release":   "timhua/pythia1b_deduped_saes",
+        "sae_id":        "pythia1b_614mtoks",
         "hf_model_name": "EleutherAI/pythia-70m-deduped",
         "hook_point":    "blocks.4.hook_resid_post",
         "hook_layer":    4,
@@ -57,8 +57,8 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
     # ── Meta Llama 3.2 1B ─────────────────────────────────────────────────────
     "llama-3.2-1b": {
         "display_name":  "Llama 3.2 1B",
-        "sae_release":   "llama_3.2_1b-res-jb",
-        "sae_id":        "blocks.8.hook_resid_post",
+        "sae_release":   "seonglae/Llama-3.2-1B-sae",
+        "sae_id":        "Llama-3.2-1B_blocks.12.hook_resid_pre_14336_topk_48_0.0002_49_fineweb_512",
         "hf_model_name": "meta-llama/Llama-3.2-1B",
         "hook_point":    "blocks.8.hook_resid_post",
         "hook_layer":    8,
@@ -126,7 +126,7 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "display_name":  "Gemma-4 E4B (Layer 7)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-e4b/btk-mat-layer-7-k-100",
-        "hf_model_name": "google/gemma-4-E4B",
+        "hf_model_name": "google/gemma-4-E4B-it",
         "hook_point":    "blocks.7.hook_resid_post",
         "hook_layer":    7,
     },
@@ -142,19 +142,18 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
         "display_name":  "Gemma-4 E4B (Layer 35)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-e4b/btk-mat-layer-35-k-100",
-        "hf_model_name": "google/gemma-4-E4B",
+        "hf_model_name": "google/gemma-4-E4B-it",
         "hook_point":    "blocks.35.hook_resid_post",
         "hook_layer":    35,
     },
 
     # ── Google Gemma-4 31B (decoderesearch SAEs) ──────────────────────────────
-    # 基座模型: google/gemma-4-27b（最接近 31B 的公开 Gemma 4 大模型）
-    # ⚠️  如果报 404，请尝试 google/gemma-4-27b-it
+    # 基座模型: google/gemma-4-31B-it
     "gemma-4-31b-l30": {
         "display_name":  "Gemma-4 31B (Layer 30)",
         "sae_release":   "decoderesearch/gemma-4-saes",
         "sae_id":        "gemma-4-31b/btk-mat-layer-30-k-100",
-        "hf_model_name": "google/gemma-4-31B",
+        "hf_model_name": "google/gemma-4-31B-it",
         "hook_point":    "blocks.30.hook_resid_post",
         "hook_layer":    30,
     },
@@ -205,12 +204,12 @@ MODEL_REGISTRY: Dict[str, ModelEntry] = {
 
     # ── Qwen 3.5 0.8B (decoderesearch SAEs) ──────────────────────────────────
     "qwen-3.5-0.8b": {
-        "display_name":  "Qwen 3.5 0.8B (Layer 12)",
+        "display_name":  "Qwen 3.5 0.8B (Layer 11)",
         "sae_release":   "decoderesearch/qwen-3.5-saes",
-        "sae_id":        "blocks.12.hook_resid_post",
+        "sae_id":        "qwen-3.5-0.8b/btk-mat-layer-11-k-100",
         "hf_model_name": "Qwen/Qwen2.5-0.5B",
-        "hook_point":    "blocks.12.hook_resid_post",
-        "hook_layer":    12,
+        "hook_point":    "blocks.11.hook_resid_post",
+        "hook_layer":    11,
     },
 
     # ── Add new models below ──────────────────────────────────────────────────
