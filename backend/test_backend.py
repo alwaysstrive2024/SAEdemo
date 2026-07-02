@@ -21,10 +21,9 @@ test_backend.py — 后端全链路诊断脚本
 
 from __future__ import annotations
 
-from __future__ import annotations
 import os
+# os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 import transformer_lens
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 import importlib
 import sys
 import traceback
@@ -122,7 +121,6 @@ if device == "cuda":
     props = torch.cuda.get_device_properties(0)
     _info(f"GPU: {torch.cuda.get_device_name(0)} | VRAM: {props.total_memory / 1e9:.1f} GB")
 
-# ══════════════════════════════════════════════════════════════════════════════
 # ⑤ 导入后端模块（与 main.py 完全相同，且按相同顺序）
 # ══════════════════════════════════════════════════════════════════════════════
 _sep("Importing Backend Modules")
@@ -187,7 +185,6 @@ class TestResult:
         _fail(f"[{stage}] {msg}")
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # ⑦ 单模型测试函数
 # ══════════════════════════════════════════════════════════════════════════════
 

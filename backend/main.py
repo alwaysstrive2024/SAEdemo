@@ -7,6 +7,10 @@ All model registration lives in registry.py.
 """
 
 from __future__ import annotations
+import os
+
+os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
+os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
 
 import time
 from contextlib import asynccontextmanager
@@ -16,6 +20,9 @@ import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+
+
+
 
 # Dependency detection
 # ─────────────────────────────────────────────────────────────────────────────
@@ -92,12 +99,19 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+origins = [
+    "http://localhost:5173",   # Vite 本地开发服务器
+    "http://127.0.0.1:5173",
+    "http://localhost:8080",   # 打包静态托管后的服务器
+    "http://127.0.0.1:8080",
+]
+
 # 开发模式：允许所有来源
 # ⚠️  生产环境请改为具体的 frontend origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
